@@ -1,0 +1,19 @@
+<form [formGroup]="loginForm" class="form" (ngSubmit)="onSubmit()">
+  <h1>Login</h1>
+  <mat-form-field class="form__input">
+    <input matInput formControlName="email" type="email" placeholder="email" required>
+    <mat-error>
+      <span *ngIf="emailErrors?.required">Email is <strong>required</strong></span>
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field class="form__input">
+    <input matInput formControlName="password" type="password" placeholder="password" required>
+    <mat-error>
+      <span *ngIf="passwordErrors?.required">Password is <strong>required</strong></span>
+    </mat-error>
+  </mat-form-field>
+  <div class="form__actions">
+    <button mat-flat-button color="primary" type="submit">Submit</button>
+    <button mat-stroked-button color="primary" type="button">Cancel</button>
+  </div>
+</form>
