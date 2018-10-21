@@ -1,0 +1,24 @@
+@import './breakpoints.scss';
+
+$drawer-width: 200px;
+
+.snackbar {
+  color: whitesmoke;
+
+  @include drawer {
+    position: relative;
+    left: $drawer-width	/ 2;
+  }
+
+  button > span {
+    color: lightgray;
+  }
+
+  &--success {
+    background-color: green;
+  }
+
+  &--error {
+    background-color: firebrick;
+  }
+}

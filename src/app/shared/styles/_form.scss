@@ -2,8 +2,8 @@
   margin: auto;
   display: flex;
   flex-direction: column;
-  width: 30%;
-  min-width: 300px;
+  width: 25%;
+  min-width: 280px;
   align-items: center;
 
   &__input {
@@ -16,5 +16,28 @@
     display: flex;
     flex-direction: row-reverse;
     justify-content: space-between;
+
+    &__button--wide {
+      flex-grow: 1;
+    }
+  }
+
+  &__links {
+    margin-top: 30px;
+    padding: 10px;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  &__inline-link {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+    &--right {
+      justify-content: flex-end;
+    }
   }
 }

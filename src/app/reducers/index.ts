@@ -5,15 +5,17 @@ import {
   createSelector,
   MetaReducer
 } from '@ngrx/store';
+
 import { environment } from '../../environments/environment';
+import { reducer as userReducer, State as UserState } from './user/user.reducer';
 
-export interface State {
-
+export interface AppState {
+  user: UserState;
 }
 
-export const reducers: ActionReducerMap<State> = {
-
+export const reducers: ActionReducerMap<AppState> = {
+  user: userReducer,
 };
 
 
-export const metaReducers: MetaReducer<State>[] = !environment.production ? [] : [];
+export const metaReducers: MetaReducer<AppState>[] = !environment.production ? [] : [];

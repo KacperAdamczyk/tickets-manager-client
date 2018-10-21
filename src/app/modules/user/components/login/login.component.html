@@ -3,17 +3,32 @@
   <mat-form-field class="form__input">
     <input matInput formControlName="email" type="email" placeholder="email" required>
     <mat-error>
-      <span *ngIf="emailErrors?.required">Email is <strong>required</strong></span>
+      <span *ngIf="email.hasError('required')">Email is <strong>required</strong></span>
+      <span *ngIf="email.hasError('email')">Email must be <strong>valid</strong></span>
     </mat-error>
   </mat-form-field>
   <mat-form-field class="form__input">
     <input matInput formControlName="password" type="password" placeholder="password" required>
     <mat-error>
-      <span *ngIf="passwordErrors?.required">Password is <strong>required</strong></span>
+      <span *ngIf="password.hasError('required')">Password is <strong>required</strong></span>
     </mat-error>
   </mat-form-field>
+  <div class="form__inline-link form__inline-link--right">
+    <a routerLink="/password_reset">Forgot password?</a>
+  </div>
   <div class="form__actions">
-    <button mat-flat-button color="primary" type="submit">Submit</button>
-    <button mat-stroked-button color="primary" type="button">Cancel</button>
+    <button mat-flat-button
+     color="primary"
+      type="submit"
+      class="form__actions__button--wide"
+      [disabled]="loginForm.invalid">
+      Login
+    </button>
+  </div>
+  <div class="form__links">
+    <div>
+      <span>Don't have an account?&nbsp;</span>
+      <a routerLink="/register">Create a new one!</a>
+    </div>
   </div>
 </form>

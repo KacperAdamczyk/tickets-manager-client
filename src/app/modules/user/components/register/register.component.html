@@ -1,0 +1,49 @@
+<form [formGroup]="registerForm" class="form" (ngSubmit)="onSubmit()">
+  <h1>Create a new account</h1>
+  <mat-form-field class="form__input">
+    <input matInput formControlName="email" type="email" placeholder="email" required>
+    <mat-error>
+      <span *ngIf="email.hasError('required')">Email is <strong>required</strong></span>
+      <span *ngIf="email.hasError('email')">Email must be <strong>valid</strong></span>
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field class="form__input">
+    <input
+      matInput
+      formControlName="password"
+      type="password"
+      placeholder="password"
+      required
+      #passwordField
+    >
+    <mat-error>
+      <span *ngIf="password.hasError('required')">Password is <strong>required</strong></span>
+    </mat-error>
+  </mat-form-field>
+  <mat-password-strength #passwordStrength [password]="passwordField.value">
+  </mat-password-strength>
+  <mat-form-field class="form__input">
+    <input matInput formControlName="passwordRepeat" type="password" placeholder="repeat password" required>
+    <mat-error>
+      <span *ngIf="password.hasError('required')">Password is <strong>required</strong></span>
+    </mat-error>
+  </mat-form-field>
+  <mat-password-strength-info
+    [passwordComponent]="passwordStrength"
+    *ngIf="password.value || password.dirty"
+  >
+  </mat-password-strength-info>
+  <div class="form__actions">
+    <button mat-flat-button
+     color="primary"
+      type="submit"
+      class="form__actions__button--wide"
+      [disabled]="registerForm.invalid || !passwordValidStrength">
+      Register
+    </button>
+  </div>
+  <div class="form__links">
+    <span>Already have an account?&nbsp;</span>
+      <a routerLink="/login">Go to login page!</a>
+  </div>
+</form>

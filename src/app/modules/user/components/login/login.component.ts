@@ -1,5 +1,9 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators, FormControl } from '@angular/forms';
+import { Store } from '@ngrx/store';
+
+import { AppState } from 'src/app/reducers';
+import { Login } from 'src/app/actions/user/user.actions';
 
 @Component({
   selector: 'app-login',
@@ -8,29 +12,23 @@ import { FormBuilder, Validators, FormControl } from '@angular/forms';
 })
 export class LoginComponent {
   loginForm = this.fb.group({
-    email: ['', Validators.required],
+    email: ['', [Validators.required, Validators.email]],
     password: ['', Validators.required]
   });
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private store: Store<AppState>) { }
 
   onSubmit(): void {
-    console.log('sss', this.loginForm.valid, this.loginForm.value);
+    const { email, password } = this.loginForm.value;
+
+    this.store.dispatch(new Login({ email, password }));
   }
 
   get email(): FormControl {
     return this.loginForm.get('email') as FormControl;
   }
 
-  get emailErrors(): any {
-    return this.email.errors;
-  }
-
   get password(): FormControl {
     return this.loginForm.get('password') as FormControl;
-  }
-
-  get passwordErrors(): any {
-    return this.password.errors;
   }
 }
