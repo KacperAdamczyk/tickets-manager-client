@@ -8,42 +8,30 @@
     </mat-error>
   </mat-form-field>
   <mat-form-field class="form__input">
-    <input
-      matInput
-      formControlName="password"
-      type="password"
-      placeholder="password"
-      required
-      #passwordField
-    >
+    <input matInput formControlName="password" type="password" placeholder="password" required #passwordField>
     <mat-error>
       <span *ngIf="password.hasError('required')">Password is <strong>required</strong></span>
     </mat-error>
   </mat-form-field>
-  <mat-password-strength #passwordStrength [password]="passwordField.value">
-  </mat-password-strength>
   <mat-form-field class="form__input">
     <input matInput formControlName="passwordRepeat" type="password" placeholder="repeat password" required>
     <mat-error>
-      <span *ngIf="password.hasError('required')">Password is <strong>required</strong></span>
+      <span *ngIf="passwordRepeat.hasError('required')">Password is <strong>required</strong></span>
     </mat-error>
   </mat-form-field>
-  <mat-password-strength-info
-    [passwordComponent]="passwordStrength"
-    *ngIf="password.value || password.dirty"
-  >
-  </mat-password-strength-info>
+  <mat-error>
+    <div *ngIf="registerForm.hasError('match')">Passwords do not <strong>match</strong></div>
+  </mat-error>
+  <div class="form__password-strength">
+    <app-password-strength [password]="password.value" [visible]="password.value || password.dirty" (validityChange)="isPasswordValid=$event"></app-password-strength>
+  </div>
   <div class="form__actions">
-    <button mat-flat-button
-     color="primary"
-      type="submit"
-      class="form__actions__button--wide"
-      [disabled]="registerForm.invalid || !passwordValidStrength">
+    <button mat-flat-button color="primary" type="submit" class="form__actions__button--wide" [disabled]="registerForm.invalid || !isPasswordValid">
       Register
     </button>
   </div>
   <div class="form__links">
     <span>Already have an account?&nbsp;</span>
-      <a routerLink="/login">Go to login page!</a>
+    <a routerLink="/login">Go to login page!</a>
   </div>
 </form>

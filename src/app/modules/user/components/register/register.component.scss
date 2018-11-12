@@ -1,1 +1,11 @@
 @import '../../../../shared/styles/_form';
+
+.form {
+  &__error {
+    
+  }
+
+  &__password-strength {
+    margin-top: 20px;
+  }
+}

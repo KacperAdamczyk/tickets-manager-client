@@ -1,0 +1,12 @@
+<div class="dashboard">
+  <h3></h3>
+    <app-selector></app-selector>
+    <ng-container *ngIf="directionSelected$ | async; else notSelected">
+        <app-trip></app-trip>
+    </ng-container>
+    <ng-template #notSelected>
+        <div class="dashboard__destination">
+          Select source and designation of your trip.
+        </div>
+    </ng-template>
+</div>

@@ -1,0 +1,30 @@
+@import '../../../../shared/styles/breakpoints.scss';
+
+.selector-form {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center;
+
+  @include drawer {
+    flex-direction: row;
+    align-items: baseline;
+  }
+
+  &__input {
+    $space: 15px;
+    width: 90%;
+    flex-grow: 1;
+    margin: 0 $space;
+
+    @include drawer {
+      width: auto;
+    }
+
+    &__suffix {
+      font-weight: bold;
+      color: gray;
+    }
+  }
+}

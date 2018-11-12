@@ -1,0 +1,11 @@
+.status-indicator {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.1em;
+  font-weight: bold;
+  color: forestgreen;
+  border: 2px solid forestgreen;
+  border-radius: 5px;
+  padding: 50px 35px;
+}

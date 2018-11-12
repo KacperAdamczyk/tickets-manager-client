@@ -1,10 +1,10 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { Validators, FormBuilder, FormControl } from '@angular/forms';
 import { Store } from '@ngrx/store';
 
 import { AppState } from 'src/app/reducers';
 import { Register } from 'src/app/actions/user/user.actions';
-import { MatPasswordStrengthComponent } from '@angular-material-extensions/password-strength';
+import { matchingPasswordsValidator } from 'src/app/validators/matching-passwords.validator';
 
 @Component({
   selector: 'app-register',
@@ -12,14 +12,18 @@ import { MatPasswordStrengthComponent } from '@angular-material-extensions/passw
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent {
-  @ViewChild(MatPasswordStrengthComponent)
-  private passwordStrength: MatPasswordStrengthComponent;
+  isPasswordValid = false;
 
-  registerForm = this.fb.group({
-    email: ['', [Validators.required, Validators.email]],
-    password: ['', Validators.required],
-    passwordRepeat: ['', Validators.required],
-  });
+  registerForm = this.fb.group(
+    {
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', Validators.required],
+      passwordRepeat: ['', Validators.required],
+    },
+    {
+      validator: matchingPasswordsValidator,
+    }
+  );
 
   constructor(private fb: FormBuilder, private store: Store<AppState>) { }
 
@@ -39,9 +43,5 @@ export class RegisterComponent {
 
   get passwordRepeat(): FormControl {
     return this.registerForm.get('passwordRepeat') as FormControl;
-  }
-
-  get passwordValidStrength(): boolean {
-    return this.passwordStrength.strength === 100;
   }
 }

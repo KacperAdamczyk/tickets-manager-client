@@ -17,6 +17,7 @@ import { AppEffects } from './effects/app.effects';
 import { UiModule } from './modules/ui/ui.module';
 import { UserModule } from './modules/user/user.module';
 import { httpInterceptorProviders } from './interceptors';
+import { DashboardModule } from './modules/dashboard/dashboard.module';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { httpInterceptorProviders } from './interceptors';
       logOnly: environment.production,
     }),
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+    DashboardModule,
   ],
   providers: [httpInterceptorProviders],
   bootstrap: [AppComponent]

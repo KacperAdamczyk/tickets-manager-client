@@ -1,0 +1,35 @@
+<form [formGroup]="tripForm" class="selector-form">
+  <mat-form-field class="selector-form__input">
+    <input matInput placeholder="From" formControlName="from" [matAutocomplete]="autoFrom">
+    <span matSuffix class="selector-form__input__suffix">
+      {{(selectedFrom$ | async)?.iata}}
+    </span>
+    <mat-autocomplete
+      #autoFrom="matAutocomplete"
+      [displayWith]="nameMapper"
+      (optionSelected)="handleSelected('from', $event)"
+    >
+      <mat-option *ngFor="let option of fromOptions$ | async" [value]="option">
+        {{option.name}}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+  <button mat-icon-button (click)="swapAirports()">
+      <mat-icon>swap_horizontal_circle</mat-icon>
+  </button>
+  <mat-form-field class="selector-form__input">
+    <input matInput placeholder="To" formControlName="to" [matAutocomplete]="autoTo">
+    <span matSuffix class="selector-form__input__suffix">
+      {{(selectedTo$ | async)?.iata}}
+    </span>
+    <mat-autocomplete
+      #autoTo="matAutocomplete"
+      [displayWith]="nameMapper"
+      (optionSelected)="handleSelected('to', $event)"
+    >
+        <mat-option *ngFor="let option of toOptions$ | async" [value]="option">
+          {{option.name}}
+        </mat-option>
+      </mat-autocomplete>
+  </mat-form-field>
+</form>

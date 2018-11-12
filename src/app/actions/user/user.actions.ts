@@ -1,7 +1,6 @@
 import { Action } from '@ngrx/store';
 
-import { IUser } from 'src/app/models/user.interface';
-import { ICredentials } from 'src/app/models/credentials.interface';
+import { IUser, ICredentials, IToken } from 'src/app/models/user.interface';
 
 export enum UserActionTypes {
   GetUser = '[User] Get User',
@@ -15,6 +14,10 @@ export enum UserActionTypes {
   Register = '[User] Register',
   RegisterSuccess = '[User] Register Success',
   RegisterFailure = '[User] Register Failure',
+
+  Activate = '[User] Activate',
+  ActivateSuccess = '[User] Activate Success',
+  ActivateFailure = '[User] Activate Failure',
 }
 
 export class GetUser implements Action {
@@ -58,7 +61,21 @@ export class RegisterFailure implements Action {
 }
 type RegisterTypes = Register | RegisterSuccess | RegisterFailure;
 
+export class Activate implements Action {
+  readonly type = UserActionTypes.Activate;
+
+  constructor(public payload: IToken) {}
+}
+export class ActivateSuccess implements Action {
+  readonly type = UserActionTypes.ActivateSuccess;
+}
+export class ActivateFailure implements Action {
+  readonly type = UserActionTypes.ActivateFailure;
+}
+type ActivateTypes = Activate | ActivateSuccess | ActivateFailure;
+
 export type UserActions =
 GetUserTypes |
 LoginTypes |
-RegisterTypes;
+RegisterTypes |
+ActivateTypes;

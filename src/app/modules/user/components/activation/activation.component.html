@@ -1,0 +1,8 @@
+<div class="content">
+  <app-status *ngIf="isInvalid$ | async else loader">
+    Link is expired
+  </app-status>
+  <ng-template #loader>
+    <mat-spinner></mat-spinner>
+  </ng-template>
+</div>
