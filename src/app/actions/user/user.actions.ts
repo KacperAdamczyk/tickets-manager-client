@@ -6,6 +6,7 @@ export enum UserActionTypes {
   GetUser = '[User] Get User',
   GetUserSuccess = '[User] Get User Success',
   GetUserFailure = '[User] Get User Failure',
+  ClearUserDetails = '[User] Clear User Details',
 
   Login = '[User] Login',
   LoginSuccess = '[User] Login Success',
@@ -31,7 +32,10 @@ export class GetUserSuccess implements Action {
 export class GetUserFailure implements Action {
   readonly type = UserActionTypes.GetUserFailure;
 }
-type GetUserTypes = GetUser | GetUserSuccess | GetUserFailure;
+export class ClearUserDetails implements Action {
+  readonly type = UserActionTypes.ClearUserDetails;
+}
+type GetUserTypes = GetUser | GetUserSuccess | GetUserFailure | ClearUserDetails;
 
 export class Login implements Action {
   readonly type = UserActionTypes.Login;

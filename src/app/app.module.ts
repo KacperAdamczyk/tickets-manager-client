@@ -18,6 +18,7 @@ import { UiModule } from './modules/ui/ui.module';
 import { UserModule } from './modules/user/user.module';
 import { httpInterceptorProviders } from './interceptors';
 import { DashboardModule } from './modules/dashboard/dashboard.module';
+import { TicketModule } from './modules/ticket/ticket.module';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { DashboardModule } from './modules/dashboard/dashboard.module';
     }),
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     DashboardModule,
+    TicketModule,
   ],
   providers: [httpInterceptorProviders],
   bootstrap: [AppComponent]

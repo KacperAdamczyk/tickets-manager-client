@@ -13,7 +13,7 @@ import {
   SwapSelectedAirport
 } from 'src/app/actions/dashboard/dashboard.actions';
 import { Fields } from 'src/app/models/dashboard.interface';
-import { IAirportBrief } from 'src/app/models/airport.interface';
+import { IAirport } from 'src/app/models/airport.interface';
 
 @Component({
   selector: 'app-selector',
@@ -89,12 +89,12 @@ export class SelectorComponent implements OnDestroy {
     this.filteredToSubscription.unsubscribe();
   }
 
-  nameMapper(value: IAirportBrief) {
+  nameMapper(value: IAirport) {
     return value.name;
   }
 
   handleSelected(field: Fields, event: MatAutocompleteSelectedEvent) {
-    const airport = event.option.value as IAirportBrief;
+    const airport = event.option.value as IAirport;
 
     this.store.dispatch(new SetSelectedAirport({ field, airport }));
   }

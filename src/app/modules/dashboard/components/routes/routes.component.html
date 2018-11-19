@@ -1,0 +1,38 @@
+<form [formGroup]="routesForm" class="form">
+  <mat-form-field class="form__date">
+    <input matInput [matDatepicker]="picker" [min]="minDate" placeholder="Choose a date" formControlName="startDate">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker touchUi #picker></mat-datepicker>
+  </mat-form-field>
+</form>
+<ng-container *ngIf="getRoutesPending$ | async; else notLoading">
+  <div class="spinner">
+    <mat-progress-spinner color="primary" mode="indeterminate"></mat-progress-spinner>
+  </div>
+</ng-container>
+<ng-template #notLoading>
+  <ng-container *ngIf="routes$ | async as routes">
+    <mat-divider></mat-divider>
+    <ul *ngIf="routes.length; else noRoutes" class="form__list">
+      <li *ngFor="let route of routes" class="form__list__item">
+        <mat-card class="form__list__item__card">
+          <div class="form__list__item__card__sections">
+            <div class="form__list__item__card__sections__section">
+              <span class="form__list__item__card__sections__section__code">{{route.sourceIata}}</span>
+              <span>{{route.startTime}}</span>
+            </div>
+            <mat-icon>arrow_forward</mat-icon>
+            <div class="form__list__item__card__sections__section">
+              <span class="form__list__item__card__sections__section__code">{{route.destinationIata}}</span>
+              <span>{{route.endTime}}</span>
+            </div>
+          </div>
+          <button mat-stroked-button color="primary" (click)="setSelectedRoute(route)" matStepperNext>Select</button>
+        </mat-card>
+      </li>
+    </ul>
+    <ng-template #noRoutes>
+      <h4 class="no-routes">No routes for this connection.</h4>
+    </ng-template>
+  </ng-container>
+</ng-template>

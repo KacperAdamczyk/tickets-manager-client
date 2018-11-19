@@ -9,17 +9,21 @@ import {
   MatButtonModule,
   MatDatepickerModule,
   MatNativeDateModule,
+  MatCardModule,
+  MatDividerModule,
+  MatProgressSpinnerModule,
+  MatStepperModule,
 } from '@angular/material';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
 
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { SelectorComponent } from './components/selector/selector.component';
-import { EffectsModule } from '@ngrx/effects';
-
-import { StoreModule } from '@ngrx/store';
-import * as fromDashboard from 'src/app/reducers/dashboard/dashboard.reducer';
 import { DashboardEffects } from 'src/app/effects/dashboard/dashboard.effects';
-import { TripComponent } from './components/trip/trip.component';
+import { RoutesComponent } from './components/routes/routes.component';
+import { TicketModule } from '../ticket/ticket.module';
+import * as fromDashboard from 'src/app/reducers/dashboard/dashboard.reducer';
 
 @NgModule({
   imports: [
@@ -32,10 +36,15 @@ import { TripComponent } from './components/trip/trip.component';
     MatAutocompleteModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatCardModule,
+    MatDividerModule,
+    MatProgressSpinnerModule,
+    MatStepperModule,
     DashboardRoutingModule,
+    TicketModule,
     EffectsModule.forFeature([DashboardEffects]),
     StoreModule.forFeature('dashboard', fromDashboard.reducer),
   ],
-  declarations: [DashboardComponent, SelectorComponent, TripComponent]
+  declarations: [DashboardComponent, SelectorComponent, RoutesComponent]
 })
 export class DashboardModule { }

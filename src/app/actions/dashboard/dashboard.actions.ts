@@ -1,6 +1,7 @@
 import { Action } from '@ngrx/store';
 
-import { IQuery, IAirportResponse, IField, ISelectedAirport } from 'src/app/models/dashboard.interface';
+import { IQuery, IAirportResponse, IField, ISelectedAirport, IRouteParams, IRouteResponse } from 'src/app/models/dashboard.interface';
+import { IRoute } from 'src/app/models/route.interface';
 
 export enum DashboardActionTypes {
   GetFilteredAirports = '[Dashboard] Get Filtered Airports',
@@ -10,6 +11,16 @@ export enum DashboardActionTypes {
   SetSelectedAirport = '[Dashboard] Set Selected Airport',
   ClearSelectedAirport = '[Dashboard] Clear Selected Airport',
   SwapSelectedAirport = '[Dashboard] Swap Selected Airport',
+
+  GetRoutes = '[Dashboard] Get Routes',
+  GetRoutesSuccess = '[Dashboard] Get Routes Success',
+  GetRoutesFailure = '[Dashboard] Get Routes Failure',
+  ClearRoutes = '[Dashboard] Clear Routes',
+
+  SelectRoute = '[Dashboard] Select Route',
+  ClearSelectedRoute = '[Dashboard] Clear Selected Route',
+
+  SetStartDate = '[Dashboard] Set Start Date',
 }
 
 export class GetFilteredAirports implements Action {
@@ -48,11 +59,56 @@ export class SwapSelectedAirport implements Action {
   readonly type = DashboardActionTypes.SwapSelectedAirport;
 }
 
-type SetSelectedAirportType =
+type SelectedAirportType =
 SetSelectedAirport &
 ClearSelectedAirport &
 SwapSelectedAirport;
 
+export class GetRoutes implements Action {
+  readonly type = DashboardActionTypes.GetRoutes;
+
+  constructor(public payload: IRouteParams) {}
+}
+
+export class GetRoutesSuccess implements Action {
+  readonly type = DashboardActionTypes.GetRoutesSuccess;
+
+  constructor(public payload: IRouteResponse) {}
+}
+
+export class GetRoutesFailure implements Action {
+  readonly type = DashboardActionTypes.GetRoutesFailure;
+}
+
+export class ClearRoutes implements Action {
+  readonly type = DashboardActionTypes.ClearRoutes;
+}
+
+type GetRoutesType = GetRoutes & GetRoutesSuccess & GetRoutesFailure & ClearRoutes;
+
+export class SelectRoute implements Action {
+  readonly type = DashboardActionTypes.SelectRoute;
+
+  constructor(public payload: IRoute) {}
+}
+
+export class ClearSelectedRoute implements Action {
+  readonly type = DashboardActionTypes.ClearSelectedRoute;
+}
+
+type SelectRouteType = SelectRoute & ClearSelectedRoute;
+
+export class SetStartDate implements Action {
+  readonly type = DashboardActionTypes.SetStartDate;
+
+  constructor(public payload: Date) {}
+}
+
+type SetStartDateType = SetStartDate;
+
 export type DashboardActions =
 GetFilteredAirportsType &
-SetSelectedAirportType;
+SelectedAirportType &
+GetRoutesType &
+SelectRouteType &
+SetStartDateType;

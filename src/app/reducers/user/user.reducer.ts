@@ -1,4 +1,3 @@
-import { Action } from '@ngrx/store';
 import { UserActions, UserActionTypes } from '../../actions/user/user.actions';
 import { IUser } from 'src/app/models/user.interface';
 
@@ -58,6 +57,7 @@ export function reducer(state = initialState, action: UserActions): State {
       };
 
     case UserActionTypes.GetUserFailure:
+    case UserActionTypes.ClearUserDetails:
       return {
         ...state,
         getPending: false,

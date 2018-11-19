@@ -7,7 +7,7 @@ import { mergeMap, map, catchError } from 'rxjs/operators';
 import {
   UserActionTypes,
   Login, LoginSuccess, LoginFailure,
-  Register, RegisterSuccess, RegisterFailure, Activate, ActivateSuccess, ActivateFailure
+  Register, RegisterSuccess, RegisterFailure, Activate, ActivateSuccess, ActivateFailure, GetUserSuccess, GetUserFailure, GetUser
 } from '../../actions/user/user.actions';
 import { UserService } from 'src/app/services/user/user.service';
 import { IUser } from 'src/app/models/user.interface';
@@ -23,7 +23,13 @@ export class UserEffects {
     ) { }
 
   @Effect()
-  getUser$ = this.actions$.pipe(ofType(UserActionTypes.GetUser));
+  getUser$ = this.actions$.pipe(
+    ofType(UserActionTypes.GetUser),
+    mergeMap(() => this.userService.getUser().pipe(
+      map(user => new GetUserSuccess(user)),
+      catchError(() => of(new GetUserFailure))
+    ))
+  );
 
   @Effect()
   register$ = this.actions$.pipe(

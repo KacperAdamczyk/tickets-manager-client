@@ -1,4 +1,5 @@
-import { IAirportBrief } from './airport.interface';
+import { IAirport } from './airport.interface';
+import { IRoute } from './route.interface';
 
 export type Fields = 'from' | 'to';
 
@@ -12,9 +13,18 @@ export interface IQuery extends IField {
 }
 
 export interface IAirportResponse extends IField {
-  airports: IAirportBrief[];
+  airports: IAirport[];
 }
 
 export interface ISelectedAirport extends IField {
-  airport: IAirportBrief;
+  airport: IAirport;
+}
+
+export interface IRouteParams {
+  fromCode: string;
+  toCode: string;
+}
+
+export interface IRouteResponse {
+  routes: IRoute[];
 }

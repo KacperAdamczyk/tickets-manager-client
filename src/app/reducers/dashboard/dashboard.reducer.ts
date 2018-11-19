@@ -1,20 +1,29 @@
 import { DashboardActionTypes, DashboardActions } from 'src/app/actions/dashboard/dashboard.actions';
-import { IAirportBrief } from 'src/app/models/airport.interface';
+import { IAirport } from 'src/app/models/airport.interface';
+import { IRoute } from 'src/app/models/route.interface';
 
 export interface State {
   getFilteredPending: boolean;
-  fromOptions: IAirportBrief[];
-  toOptions: IAirportBrief[];
-  selectedFrom: IAirportBrief;
-  selectedTo: IAirportBrief;
+  getRoutesPending: boolean;
+  fromOptions: IAirport[];
+  toOptions: IAirport[];
+  selectedFrom: IAirport;
+  selectedTo: IAirport;
+  startDate: Date;
+  selectedRoute: IRoute;
+  routes: IRoute[];
 }
 
 export const initialState: State = {
   getFilteredPending: false,
+  getRoutesPending: false,
   fromOptions: [],
   toOptions: [],
   selectedFrom: null,
   selectedTo: null,
+  startDate: null,
+  selectedRoute: null,
+  routes: [],
 };
 
 export function reducer(state = initialState, action: DashboardActions): State {
@@ -76,6 +85,50 @@ export function reducer(state = initialState, action: DashboardActions): State {
       ...state,
       selectedFrom: state.selectedTo,
       selectedTo: state.selectedFrom,
+    };
+
+    case DashboardActionTypes.GetRoutes:
+    return {
+      ...state,
+      getRoutesPending: true,
+    };
+
+    case DashboardActionTypes.GetRoutesSuccess:
+    return {
+      ...state,
+      getRoutesPending: false,
+      routes: action.payload.routes,
+    };
+
+    case DashboardActionTypes.GetFilteredAirportsFailure:
+    return {
+      ...state,
+      getRoutesPending: false,
+      routes: [],
+    };
+
+    case DashboardActionTypes.ClearRoutes:
+    return {
+      ...state,
+      routes: [],
+    };
+
+    case DashboardActionTypes.SetStartDate:
+    return {
+      ...state,
+      startDate: action.payload,
+    };
+
+    case DashboardActionTypes.SelectRoute:
+    return {
+      ...state,
+      selectedRoute: action.payload,
+    };
+
+    case DashboardActionTypes.ClearSelectedRoute:
+    return {
+      ...state,
+      selectedRoute: null,
     };
 
     default:
