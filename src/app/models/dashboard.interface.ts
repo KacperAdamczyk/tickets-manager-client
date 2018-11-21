@@ -28,3 +28,8 @@ export interface IRouteParams {
 export interface IRouteResponse {
   routes: IRoute[];
 }
+
+export interface ITicketRequest {
+  routeId: string;
+  startDate: Date;
+}

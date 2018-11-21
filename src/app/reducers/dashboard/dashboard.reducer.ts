@@ -5,6 +5,7 @@ import { IRoute } from 'src/app/models/route.interface';
 export interface State {
   getFilteredPending: boolean;
   getRoutesPending: boolean;
+  createTicketPending: boolean;
   fromOptions: IAirport[];
   toOptions: IAirport[];
   selectedFrom: IAirport;
@@ -17,6 +18,7 @@ export interface State {
 export const initialState: State = {
   getFilteredPending: false,
   getRoutesPending: false,
+  createTicketPending: false,
   fromOptions: [],
   toOptions: [],
   selectedFrom: null,
@@ -129,6 +131,19 @@ export function reducer(state = initialState, action: DashboardActions): State {
     return {
       ...state,
       selectedRoute: null,
+    };
+
+    case DashboardActionTypes.CreateTicket:
+    return {
+      ...state,
+      createTicketPending: true,
+    };
+
+    case DashboardActionTypes.CreateTicketSuccess:
+    case DashboardActionTypes.CreateTicketFailure:
+    return {
+      ...state,
+      createTicketPending: false,
     };
 
     default:

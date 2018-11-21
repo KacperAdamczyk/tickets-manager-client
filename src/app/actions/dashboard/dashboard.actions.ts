@@ -1,6 +1,14 @@
 import { Action } from '@ngrx/store';
 
-import { IQuery, IAirportResponse, IField, ISelectedAirport, IRouteParams, IRouteResponse } from 'src/app/models/dashboard.interface';
+import {
+  IQuery,
+  IAirportResponse,
+  IField,
+  ISelectedAirport,
+  IRouteParams,
+  IRouteResponse,
+  ITicketRequest
+ } from 'src/app/models/dashboard.interface';
 import { IRoute } from 'src/app/models/route.interface';
 
 export enum DashboardActionTypes {
@@ -21,6 +29,10 @@ export enum DashboardActionTypes {
   ClearSelectedRoute = '[Dashboard] Clear Selected Route',
 
   SetStartDate = '[Dashboard] Set Start Date',
+
+  CreateTicket = '[Dashboard] CreateTicket',
+  CreateTicketSuccess = '[Dashboard] CreateTicket Success',
+  CreateTicketFailure = '[Dashboard] CreateTicket Failure',
 }
 
 export class GetFilteredAirports implements Action {
@@ -106,9 +118,26 @@ export class SetStartDate implements Action {
 
 type SetStartDateType = SetStartDate;
 
+export class CreateTicket implements Action {
+  readonly type = DashboardActionTypes.CreateTicket;
+
+  constructor(public payload: ITicketRequest) {}
+}
+
+export class CreateTicketSuccess implements Action {
+  readonly type = DashboardActionTypes.CreateTicketSuccess;
+}
+
+export class CreateTicketFailure implements Action {
+  readonly type = DashboardActionTypes.CreateTicketFailure;
+}
+
+type CreateTicketType = CreateTicket & CreateTicketSuccess & CreateTicketFailure;
+
 export type DashboardActions =
 GetFilteredAirportsType &
 SelectedAirportType &
 GetRoutesType &
 SelectRouteType &
-SetStartDateType;
+SetStartDateType &
+CreateTicketType;

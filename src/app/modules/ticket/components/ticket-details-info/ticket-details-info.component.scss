@@ -1,0 +1,24 @@
+@import '../../../../shared/styles/breakpoints.scss';
+
+.info {
+  display: grid;
+  grid-template-columns: 1fr;
+  justify-items: center;
+  grid-row-gap: 20px;
+
+  @include drawer {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  &__header {
+    margin: 5px 0;
+  }
+
+  &__value {
+    font-weight: bold;
+  }
+
+  &__distance {
+    grid-column: 1 / 3;
+  }
+}

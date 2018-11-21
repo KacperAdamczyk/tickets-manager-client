@@ -1,5 +1,14 @@
-.details {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
+.card {
+  margin-top: 3px;
+
+  &__title {
+    display: flex;
+    align-items: center;
+  }
+
+  &__actions {
+    display: flex;
+    justify-content: center;
+    margin: 10px 0;
+  }
 }

@@ -1,0 +1,53 @@
+<div class="info">
+  <div>
+    <h3 class="info__header">From:</h3>
+    <div>
+      <span>Airport name: </span>
+      <span class="info__value">{{ticket?.sourceAirport?.name}}</span>
+    </div>
+    <div>
+      <span>Airport code: </span>
+      <span class="info__value">{{ticket?.sourceAirport?.iata}}/{{ticket?.sourceAirport?.icao}}</span>
+    </div>
+    <div>
+      <span>City: </span>
+      <span class="info__value">{{ticket?.sourceAirport?.city}}</span>
+    </div>
+    <div>
+      <span>County: </span>
+      <span class="info__value">{{ticket?.sourceAirport?.country}}</span>
+    </div>
+    <div>
+      <span>Start date: </span>
+      <span class="info__value">{{ticket?.route?.startTime}}</span>
+    </div>
+  </div>
+  <div>
+    <h3 class="info__header">To:</h3>
+    <div>
+      <span>Airport name: </span>
+      <span class="info__value">{{ticket?.destinationAirport?.name}}</span>
+    </div>
+    <div>
+      <span>Airport code: </span>
+      <span class="info__value">{{ticket?.destinationAirport?.iata}}/{{ticket?.destinationAirport?.icao}}</span>
+    </div>
+    <div>
+      <span>City: </span>
+      <span class="info__value">{{ticket?.destinationAirport?.city}}</span>
+    </div>
+    <div>
+      <span>County: </span>
+      <span class="info__value">{{ticket?.destinationAirport?.country}}</span>
+    </div>
+    <div>
+      <span>Start date: </span>
+      <span class="info__value">{{ticket?.route?.endTime}}</span>
+    </div>
+  </div>
+  <div class="info__distance">
+    <span>Distance: </span>
+    <span class="info__value">{{ticket?.route?.distance}}</span>
+  </div>
+
+</div>

@@ -1,14 +1,7 @@
-@import '../../../../shared/styles/variables.scss';
-@import '../../../../shared/styles/breakpoints.scss';
+@import '../../../../shared/styles/common.scss';
 
 .dashboard {
-  width: 100%;
-  min-width: $min-width-padding;
-  margin: auto;
-
-  @include drawer {
-    max-width: 800px;
-  }
+  @include content;
 
   &__header {
     text-align: center;

@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormControl } from '@angular/forms';
 import { select, Store } from '@ngrx/store';
 import { combineLatest, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, filter } from 'rxjs/operators';
 import { DateTime } from 'luxon';
 
 import { AppState } from 'src/app/reducers';
@@ -39,7 +39,7 @@ export class RoutesComponent implements OnInit, OnDestroy {
     ),
     this.startDate$,
   ).pipe(
-    map(([routes, startDate]) => routes.map(route => {
+    map(([routes, startDate]): IRoute[] => routes.map(route => {
       const fromMillis = DateTime.fromMillis(startDate.valueOf()).startOf('day').valueOf();
       const startTime = DateTime.fromMillis(route.startTime as number).plus(fromMillis);
       const endTime = DateTime.fromMillis(route.endTime as number).plus(fromMillis);
@@ -49,7 +49,7 @@ export class RoutesComponent implements OnInit, OnDestroy {
         startTime: startTime.toLocaleString(DateTime.DATETIME_SHORT),
         endTime: endTime.toLocaleString(DateTime.DATETIME_SHORT),
       };
-    }))
+    })),
   );
 
   airportsSubscription = combineLatest(

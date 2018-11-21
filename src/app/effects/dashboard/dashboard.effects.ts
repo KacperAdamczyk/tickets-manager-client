@@ -10,12 +10,17 @@ import {
   GetFilteredAirportsFailure,
   GetRoutes,
   GetRoutesSuccess,
-  GetRoutesFailure
+  GetRoutesFailure,
+  CreateTicket,
+  CreateTicketSuccess,
+  CreateTicketFailure
 } from 'src/app/actions/dashboard/dashboard.actions';
 import { IAirport } from 'src/app/models/airport.interface';
 import { AirportService } from 'src/app/services/airport/airport.service';
 import { RouteService } from 'src/app/services/route/route.service';
 import { IRoute } from 'src/app/models/route.interface';
+import { TicketService } from 'src/app/services/ticket/ticket.service';
+import { SnackbarService } from 'src/app/services/snackbar/snackbar.service';
 
 
 @Injectable()
@@ -25,6 +30,8 @@ export class DashboardEffects {
     private actions$: Actions,
     private airportService: AirportService,
     private routeService: RouteService,
+    private ticketService: TicketService,
+    private snackbar: SnackbarService,
     ) {}
 
   @Effect()
@@ -45,6 +52,18 @@ export class DashboardEffects {
       this.routeService.getRoutes(fromCode, toCode).pipe(
         map(response => new GetRoutesSuccess({ routes: response as IRoute[] })),
         catchError(() => of(new GetRoutesFailure))
+      )
+    ))
+  );
+
+  @Effect()
+  createTicket$ = this.actions$.pipe(
+    ofType(DashboardActionTypes.CreateTicket),
+    mergeMap(({ payload: { routeId, startDate } }: CreateTicket) => (
+      this.ticketService.create(routeId, startDate).pipe(
+        this.snackbar.fromResponse(),
+        map(() => new CreateTicketSuccess),
+        catchError(() => of(new CreateTicketFailure))
       )
     ))
   );

@@ -1,0 +1,5 @@
+<ul class="list" *ngIf="tickets$ | async as tickets">
+  <li class="list__item" *ngFor="let ticket of tickets">
+    <app-ticket-list-item [ticket]="ticket"></app-ticket-list-item>
+  </li>
+</ul>

@@ -1,27 +1,20 @@
-<mat-card *ngIf="ticket$ | async as ticket">
+<mat-card class="card" *ngIf="ticket$ | async as ticket">
   <mat-card-header>
-    <mat-card-title>{{ticket.source.iata}} -> {{ticket.destination.iata}}</mat-card-title>
-    <mat-card-subtitle>{{ticket.route.startTime}} -> {{ticket.route.endTime}}</mat-card-subtitle>
+    <mat-card-title class="card__title">
+      {{ticket?.source?.iata}}
+      <mat-icon>arrow_forward</mat-icon>
+      {{ticket?.destination?.iata}}
+    </mat-card-title>
+    <mat-card-subtitle class="card__title">
+      {{ticket?.route?.startTime}}
+      <mat-icon>arrow_forward</mat-icon>
+      {{ticket?.route?.endTime}}
+    </mat-card-subtitle>
   </mat-card-header>
-  <mat-card-content class="details">
-    <div>
-      <h4>From:</h4>
-      <div>{{ticket.source.name}}</div>
-      <div>{{ticket.source.iata}}/{{ticket.source.icao}}</div>
-      <div>{{ticket.source.city}}</div>
-      <div>{{ticket.source.country}}</div>
-      <div>{{ticket.route.startTime}}</div>
-    </div>
-    <div>
-      <h4>To:</h4>
-      <div>{{ticket.destination.name}}</div>
-      <div>{{ticket.destination.iata}}/{{ticket.destination.icao}}</div>
-      <div>{{ticket.destination.city}}</div>
-      <div>{{ticket.destination.country}}</div>
-      <div>{{ticket.route.endTime}}</div>
-    </div>
+  <mat-card-content class="card__details">
+    <app-ticket-details-info [ticket]="ticket"></app-ticket-details-info>
   </mat-card-content>
-  <mat-card-actions>
-    <button mat-raised-button color="primary">Book</button>
+  <mat-card-actions class="card__actions">
+    <button mat-raised-button color="primary" (click)="createTicket(ticket)">Book ticket</button>
   </mat-card-actions>
 </mat-card>

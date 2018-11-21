@@ -1,0 +1,16 @@
+<mat-card class="item">
+  <span class="item__element">{{startDate}}</span>
+  <div class="item__element">
+      <span>{{ticket.route.sourceAirport.city}}</span>
+      <mat-icon>arrow_forward</mat-icon>
+      <span>{{ticket.route.destinationAirport.city}}</span>
+  </div>
+  <div class="item__actions">
+    <button mat-icon-button color="primary">
+        <mat-icon>remove_red_eye</mat-icon>
+    </button>
+    <button mat-icon-button color="warn" [routerLink]="ticketUrl">
+        <mat-icon>delete</mat-icon>
+    </button>
+  </div>
+</mat-card>
