@@ -4,21 +4,38 @@ import { TicketActionTypes, TicketActions } from 'src/app/actions/ticket/ticket.
 
 
 export interface State {
+  createTicketPending: boolean;
   GetTicketsPending: boolean;
   GetTicketPending: boolean;
   DeleteTicketsPending: boolean;
   tickets: Partial<ITicket>[];
+  ticket: ITicket;
 }
 
 export const initialState: State = {
+  createTicketPending: false,
   GetTicketsPending: false,
   GetTicketPending: false,
   DeleteTicketsPending: false,
   tickets: [],
+  ticket: null,
 };
 
 export function reducer(state = initialState, action: TicketActions): State {
   switch (action.type) {
+    case TicketActionTypes.CreateTicket:
+    return {
+      ...state,
+      createTicketPending: true,
+    };
+
+    case TicketActionTypes.CreateTicketSuccess:
+    case TicketActionTypes.CreateTicketFailure:
+    return {
+      ...state,
+      createTicketPending: false,
+    };
+
     case TicketActionTypes.GetTickets:
     return {
       ...state,
@@ -37,6 +54,26 @@ export function reducer(state = initialState, action: TicketActions): State {
       ...state,
       GetTicketsPending: false,
       tickets: [],
+    };
+
+    case TicketActionTypes.GetTicket:
+    return {
+      ...state,
+      GetTicketPending: true,
+    };
+
+    case TicketActionTypes.GetTicketSuccess:
+    return {
+      ...state,
+      GetTicketPending: false,
+      ticket: action.payload,
+    };
+
+    case TicketActionTypes.GetTicketFailure:
+    return {
+      ...state,
+      GetTicketPending: false,
+      ticket: null,
     };
 
     default:

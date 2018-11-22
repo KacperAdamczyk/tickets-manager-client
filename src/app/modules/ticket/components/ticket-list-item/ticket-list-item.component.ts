@@ -14,8 +14,4 @@ export class TicketListItemComponent {
     const startTime = DateTime.fromISO(this.ticket.route.startTime as string).valueOf();
     return DateTime.fromISO(this.ticket.startDate as string).plus(startTime).toLocaleString(DateTime.DATETIME_SHORT);
   }
-
-  get ticketUrl(): string[] {
-    return [`tickets/${this.ticket.id}`];
-  }
 }

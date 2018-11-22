@@ -13,9 +13,8 @@
   </mat-card-header>
   <mat-card-content class="card__details">
     <app-ticket-info [ticket]="ticket"></app-ticket-info>
-    <qrcode class="card__details__qr-code" [qrdata]="ticket.id" [size]="200" [level]="'H'"></qrcode>
   </mat-card-content>
   <mat-card-actions class="card__actions">
-    <button mat-raised-button color="primary">Remove reservation</button>
+    <button mat-raised-button color="primary" (click)="createTicket(ticket)">Book ticket</button>
   </mat-card-actions>
 </mat-card>

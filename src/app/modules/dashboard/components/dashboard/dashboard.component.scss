@@ -12,6 +12,8 @@
   }
 
   &__card {
+    width: auto;
+
     &:not(:last-child) {
       margin-bottom: 8px;
     }

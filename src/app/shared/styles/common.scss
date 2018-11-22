@@ -2,7 +2,6 @@
 @import './breakpoints.scss';
 
 @mixin content {
-  width: 100%;
   min-width: $min-width-padding;
   margin: auto;
 

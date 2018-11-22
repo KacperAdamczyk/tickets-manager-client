@@ -1,20 +1,32 @@
 <form [formGroup]="registerForm" class="form" (ngSubmit)="onSubmit()">
   <h1>Create a new account</h1>
   <mat-form-field class="form__input">
-    <input matInput formControlName="email" type="email" placeholder="email" required>
+    <input matInput formControlName="email" type="email" placeholder="Email" required>
     <mat-error>
       <span *ngIf="email.hasError('required')">Email is <strong>required</strong></span>
       <span *ngIf="email.hasError('email')">Email must be <strong>valid</strong></span>
     </mat-error>
   </mat-form-field>
   <mat-form-field class="form__input">
-    <input matInput formControlName="password" type="password" placeholder="password" required #passwordField>
+    <input matInput formControlName="firstName" type="text" placeholder="First name" required>
+    <mat-error>
+      <span *ngIf="firstName.hasError('required')">First name is <strong>required</strong></span>
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field class="form__input">
+    <input matInput formControlName="lastName" type="text" placeholder="Last name" required>
+    <mat-error>
+      <span *ngIf="lastName.hasError('required')">Last name is <strong>required</strong></span>
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field class="form__input">
+    <input matInput formControlName="password" type="password" placeholder="Password" required #passwordField>
     <mat-error>
       <span *ngIf="password.hasError('required')">Password is <strong>required</strong></span>
     </mat-error>
   </mat-form-field>
   <mat-form-field class="form__input">
-    <input matInput formControlName="passwordRepeat" type="password" placeholder="repeat password" required>
+    <input matInput formControlName="passwordRepeat" type="password" placeholder="Repeat password" required>
     <mat-error>
       <span *ngIf="passwordRepeat.hasError('required')">Password is <strong>required</strong></span>
     </mat-error>

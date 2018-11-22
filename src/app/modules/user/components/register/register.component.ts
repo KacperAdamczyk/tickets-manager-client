@@ -17,6 +17,8 @@ export class RegisterComponent {
   registerForm = this.fb.group(
     {
       email: ['', [Validators.required, Validators.email]],
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
       password: ['', Validators.required],
       passwordRepeat: ['', Validators.required],
     },
@@ -28,13 +30,21 @@ export class RegisterComponent {
   constructor(private fb: FormBuilder, private store: Store<AppState>) { }
 
   onSubmit(): void {
-    const { email, password } = this.registerForm.value;
+    const { passwordRepeat, ...user } = this.registerForm.value;
 
-    this.store.dispatch(new Register({ email, password }));
+    this.store.dispatch(new Register(user));
   }
 
   get email(): FormControl {
     return this.registerForm.get('email') as FormControl;
+  }
+
+  get firstName(): FormControl {
+    return this.registerForm.get('firstName') as FormControl;
+  }
+
+  get lastName(): FormControl {
+    return this.registerForm.get('lastName') as FormControl;
   }
 
   get password(): FormControl {

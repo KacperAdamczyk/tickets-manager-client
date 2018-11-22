@@ -22,8 +22,8 @@ export class UserService {
 
   constructor(private http: HttpClient, private store: Store<AppState>) { }
 
-  register(email: string, password: string): Observable<IDataResponse> {
-    return this.http.post<IDataResponse>(`${environment.apiUrl}/users`, { email, password });
+  register(user: Partial<IUser>): Observable<IDataResponse> {
+    return this.http.post<IDataResponse>(`${environment.apiUrl}/users`, user);
   }
 
   login(email: string, password: string): Observable<IDataResponse> {

@@ -34,8 +34,8 @@ export class UserEffects {
   @Effect()
   register$ = this.actions$.pipe(
     ofType(UserActionTypes.Register),
-    mergeMap(({ payload: { email, password } }: Register) => (
-      this.userService.register(email, password).pipe(
+    mergeMap(({ payload: user }: Register) => (
+      this.userService.register(user).pipe(
         this.snackbar.fromResponse(),
         map(() => {
           this.router.navigateByUrl('/login');

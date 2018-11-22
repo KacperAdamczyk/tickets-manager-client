@@ -6,10 +6,10 @@
       <span>{{ticket.route.destinationAirport.city}}</span>
   </div>
   <div class="item__actions">
-    <button mat-icon-button color="primary">
+    <button mat-icon-button color="primary" [routerLink]="ticket.id">
         <mat-icon>remove_red_eye</mat-icon>
     </button>
-    <button mat-icon-button color="warn" [routerLink]="ticketUrl">
+    <button mat-icon-button color="warn">
         <mat-icon>delete</mat-icon>
     </button>
   </div>

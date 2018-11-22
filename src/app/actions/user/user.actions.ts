@@ -55,7 +55,7 @@ type LoginTypes = Login | LoginSuccess | LoginFailure;
 export class Register implements Action {
   readonly type = UserActionTypes.Register;
 
-  constructor(public payload: ICredentials) {}
+  constructor(public payload: Partial<IUser>) {}
 }
 export class RegisterSuccess implements Action {
   readonly type = UserActionTypes.RegisterSuccess;

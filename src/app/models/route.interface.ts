@@ -11,8 +11,8 @@ export interface IRoute {
 
 export interface IRouteFull {
   _id: string;
-  startTime: string;
-  endTime: string;
+  startTime: number | string;
+  endTime: number | string;
   sourceAirport: IAirport;
   destinationAirport: IAirport;
   distance: number;
