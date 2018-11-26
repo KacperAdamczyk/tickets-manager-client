@@ -19,12 +19,12 @@
           <div class="form__list__item__card__sections">
             <div class="form__list__item__card__sections__section">
               <span class="form__list__item__card__sections__section__code">{{route.sourceIata}}</span>
-              <span>{{route.startTime}}</span>
+              <span>{{route.startTime | date:'short'}}</span>
             </div>
             <mat-icon>arrow_forward</mat-icon>
             <div class="form__list__item__card__sections__section">
               <span class="form__list__item__card__sections__section__code">{{route.destinationIata}}</span>
-              <span>{{route.endTime}}</span>
+              <span>{{route.endTime | date:'short'}}</span>
             </div>
           </div>
           <button mat-stroked-button color="primary" (click)="setSelectedRoute(route)" matStepperNext>Select</button>

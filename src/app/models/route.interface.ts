@@ -2,18 +2,11 @@ import { IAirport } from './airport.interface';
 
 export interface IRoute {
   _id: string;
-  startTime: number | string;
-  endTime: number | string;
-  sourceIata: string;
-  destinationIata: string;
-  distance: number;
-}
-
-export interface IRouteFull {
-  _id: string;
-  startTime: number | string;
-  endTime: number | string;
-  sourceAirport: IAirport;
-  destinationAirport: IAirport;
+  startTime: number | string | Date;
+  endTime: number | string | Date;
+  sourceIata?: string;
+  destinationIata?: string;
+  sourceAirport?: IAirport;
+  destinationAirport?: IAirport;
   distance: number;
 }

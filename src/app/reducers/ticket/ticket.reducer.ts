@@ -5,18 +5,18 @@ import { TicketActionTypes, TicketActions } from 'src/app/actions/ticket/ticket.
 
 export interface State {
   createTicketPending: boolean;
-  GetTicketsPending: boolean;
-  GetTicketPending: boolean;
-  DeleteTicketsPending: boolean;
+  getTicketsPending: boolean;
+  getTicketPending: boolean;
+  deleteTicketsPending: boolean;
   tickets: Partial<ITicket>[];
   ticket: ITicket;
 }
 
 export const initialState: State = {
   createTicketPending: false,
-  GetTicketsPending: false,
-  GetTicketPending: false,
-  DeleteTicketsPending: false,
+  getTicketsPending: false,
+  getTicketPending: false,
+  deleteTicketsPending: false,
   tickets: [],
   ticket: null,
 };
@@ -39,41 +39,60 @@ export function reducer(state = initialState, action: TicketActions): State {
     case TicketActionTypes.GetTickets:
     return {
       ...state,
-      GetTicketsPending: true,
+      getTicketsPending: true,
     };
 
     case TicketActionTypes.GetTicketsSuccess:
     return {
       ...state,
-      GetTicketsPending: false,
+      getTicketsPending: false,
       tickets: action.payload,
     };
 
     case TicketActionTypes.GetTicketsFailure:
     return {
       ...state,
-      GetTicketsPending: false,
+      getTicketsPending: false,
       tickets: [],
     };
 
     case TicketActionTypes.GetTicket:
     return {
       ...state,
-      GetTicketPending: true,
+      getTicketPending: true,
     };
 
     case TicketActionTypes.GetTicketSuccess:
     return {
       ...state,
-      GetTicketPending: false,
+      getTicketPending: false,
       ticket: action.payload,
     };
 
     case TicketActionTypes.GetTicketFailure:
     return {
       ...state,
-      GetTicketPending: false,
+      getTicketPending: false,
       ticket: null,
+    };
+
+    case TicketActionTypes.DeleteTicket:
+    return {
+      ...state,
+      deleteTicketsPending: true,
+    };
+
+    case TicketActionTypes.DeleteTicketSuccess:
+    return {
+      ...state,
+      deleteTicketsPending: false,
+      tickets: state.tickets.filter(({ id }) => id !== action.payload.id),
+    };
+
+    case TicketActionTypes.DeleteTicketFailure:
+    return {
+      ...state,
+      deleteTicketsPending: false,
     };
 
     default:

@@ -1,5 +1,5 @@
 <mat-card class="item">
-  <span class="item__element">{{startDate}}</span>
+  <span class="item__element">{{startDate | date:'short'}}</span>
   <div class="item__element">
       <span>{{ticket.route.sourceAirport.city}}</span>
       <mat-icon>arrow_forward</mat-icon>
@@ -9,7 +9,7 @@
     <button mat-icon-button color="primary" [routerLink]="ticket.id">
         <mat-icon>remove_red_eye</mat-icon>
     </button>
-    <button mat-icon-button color="warn">
+    <button mat-icon-button color="warn" (click)="deleteTicket(ticket)">
         <mat-icon>delete</mat-icon>
     </button>
   </div>

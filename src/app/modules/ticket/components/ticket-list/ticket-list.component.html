@@ -1,5 +1,17 @@
-<ul class="list" *ngIf="tickets$ | async as tickets">
-  <li class="list__item" *ngFor="let ticket of tickets">
-    <app-ticket-list-item [ticket]="ticket"></app-ticket-list-item>
-  </li>
-</ul>
+<div *ngIf="tickets$ | async as tickets">
+  <div *ngIf="!(isPending$ | async); else loading">
+    <ul class="list" *ngIf="tickets.length; else noTickets">
+      <li class="list__item" *ngFor="let ticket of tickets">
+        <app-ticket-list-item [ticket]="ticket"></app-ticket-list-item>
+      </li>
+    </ul>
+    <ng-template #noTickets>
+      You don't have any tickets, <a>book them now!</a>
+    </ng-template>
+  </div>
+  <ng-template #loading>
+    <div class="spinner">
+      <mat-progress-spinner color="primary" mode="indeterminate"></mat-progress-spinner>
+    </div>
+  </ng-template>
+</div>

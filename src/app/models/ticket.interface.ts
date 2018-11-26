@@ -1,9 +1,8 @@
-import { IAirport } from './airport.interface';
-import { IRouteFull, IRoute } from './route.interface';
+import { IRoute } from './route.interface';
 
 export interface ITicket {
   id: string;
-  route: Partial<IRoute & IRouteFull>;
+  route: Partial<IRoute>;
   startDate: string | Date;
   purchaseDate: string;
 }

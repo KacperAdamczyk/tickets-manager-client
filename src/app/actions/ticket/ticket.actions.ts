@@ -79,6 +79,8 @@ export class DeleteTicket implements Action {
 
 export class DeleteTicketSuccess implements Action {
   readonly type = TicketActionTypes.DeleteTicketSuccess;
+
+  constructor(public payload: IdPayload) {}
 }
 
 export class DeleteTicketFailure implements Action {

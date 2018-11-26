@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { environment } from 'src/environments/environment';
-import { IDataResponse } from 'src/app/shared/interfaces/response.interface';
+import { IDataResponse, IMessageResponse } from 'src/app/shared/interfaces/response.interface';
 import { ITicket } from 'src/app/models/ticket.interface';
 
 @Injectable({
@@ -26,5 +26,9 @@ export class TicketService {
 
   getTicket(id: string): Observable<ITicket> {
     return this.http.get<ITicket>(`${environment.apiUrl}/tickets/${id}`, { withCredentials: true });
+  }
+
+  deleteTicket(id: string): Observable<IMessageResponse> {
+    return this.http.delete<IMessageResponse>(`${environment.apiUrl}/tickets/${id}`, { withCredentials: true });
   }
 }

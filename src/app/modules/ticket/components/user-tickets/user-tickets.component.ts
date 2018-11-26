@@ -14,6 +14,10 @@ export class UserTicketsComponent implements OnInit {
     select('ticket', 'tickets'),
   );
 
+  ticketsPending$ = this.store.pipe(
+    select('ticket', 'getTicketsPending'),
+  );
+
   constructor(private store: Store<AppState>) { }
 
   ngOnInit() {

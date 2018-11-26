@@ -1,0 +1,11 @@
+<div mat-dialog-title class="header">
+  <h2>Delete reservation</h2>
+  <mat-icon class="header__icon">warning</mat-icon>
+</div>
+<div mat-dialog-content>
+  <p>Are you sure that you want to delete this ticket?</p>
+</div>
+<div mat-dialog-actions class="actions">
+  <button mat-stroked-button color="primary" [mat-dialog-close]="false">Cancel</button>
+  <button mat-raised-button color="primary" [mat-dialog-close]="true" cdkFocusInitial>Delete</button>
+</div>

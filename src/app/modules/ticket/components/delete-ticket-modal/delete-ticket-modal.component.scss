@@ -1,0 +1,19 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &__icon {
+    $size: 2em;
+    width: $size / 2;
+    height: $size / 2;
+    font-size: $size;
+    color: red;
+    margin-left: 10px;
+  }
+}
+
+.actions {
+  display: flex;
+  justify-content: space-between;
+}

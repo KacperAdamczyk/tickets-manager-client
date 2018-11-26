@@ -9,4 +9,5 @@ import { ITicket } from 'src/app/models/ticket.interface';
 })
 export class TicketListComponent {
   @Input() tickets$: Observable<ITicket[]>;
+  @Input() isPending$: Observable<boolean>;
 }

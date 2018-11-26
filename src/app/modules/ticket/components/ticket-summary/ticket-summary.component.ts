@@ -23,7 +23,7 @@ export class TicketSummaryComponent {
         sourceAirport: dashboard.selectedFrom,
         destinationAirport: dashboard.selectedTo,
       },
-      startDate: dashboard.startDate,
+      startDate: dashboard.startDate as Date,
     }))
   );
 

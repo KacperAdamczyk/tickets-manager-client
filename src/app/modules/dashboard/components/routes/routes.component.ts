@@ -46,8 +46,8 @@ export class RoutesComponent implements OnInit, OnDestroy {
 
       return {
         ...route,
-        startTime: startTime.toLocaleString(DateTime.DATETIME_SHORT),
-        endTime: endTime.toLocaleString(DateTime.DATETIME_SHORT),
+        startTime: startTime.toJSDate(),
+        endTime: endTime.toJSDate(),
       };
     })),
   );

@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { mergeMap, map, catchError } from 'rxjs/operators';
-import { Router } from '@angular/router';
 
 import {
   TicketActionTypes,
@@ -12,7 +12,10 @@ import {
   GetTicket,
   CreateTicket,
   CreateTicketSuccess,
-  CreateTicketFailure
+  CreateTicketFailure,
+  DeleteTicket,
+  DeleteTicketSuccess,
+  DeleteTicketFailure
 } from '../../actions/ticket/ticket.actions';
 import { TicketService } from 'src/app/services/ticket/ticket.service';
 import { SnackbarService } from 'src/app/services/snackbar/snackbar.service';
@@ -57,10 +60,21 @@ export class TicketEffects {
     ))
   );
 
+  @Effect()
+  deleteTicket$ = this.actions$.pipe(
+    ofType(TicketActionTypes.DeleteTicket),
+    mergeMap(({ payload: { id } }: DeleteTicket) => (
+      this.ticketService.deleteTicket(id).pipe(
+        map(() => new DeleteTicketSuccess({ id })),
+        catchError(() => of(new DeleteTicketFailure))
+      )
+    ))
+  );
+
   constructor(
     private actions$: Actions,
     private ticketService: TicketService,
     private router: Router,
     private snackbar: SnackbarService,
-    ) { }
+    ) {}
 }
