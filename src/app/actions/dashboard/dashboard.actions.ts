@@ -48,7 +48,7 @@ export class GetFilteredAirportsFailure implements Action {
   constructor(public payload: IField) {}
 }
 
-type GetFilteredAirportsType = GetFilteredAirports & GetFilteredAirportsSuccess & GetFilteredAirportsFailure;
+type GetFilteredAirportsType = GetFilteredAirports | GetFilteredAirportsSuccess | GetFilteredAirportsFailure;
 
 export class SetSelectedAirport implements Action {
   readonly type = DashboardActionTypes.SetSelectedAirport;
@@ -67,8 +67,8 @@ export class SwapSelectedAirport implements Action {
 }
 
 type SelectedAirportType =
-SetSelectedAirport &
-ClearSelectedAirport &
+SetSelectedAirport |
+ClearSelectedAirport |
 SwapSelectedAirport;
 
 export class GetRoutes implements Action {
@@ -91,7 +91,7 @@ export class ClearRoutes implements Action {
   readonly type = DashboardActionTypes.ClearRoutes;
 }
 
-type GetRoutesType = GetRoutes & GetRoutesSuccess & GetRoutesFailure & ClearRoutes;
+type GetRoutesType = GetRoutes | GetRoutesSuccess | GetRoutesFailure | ClearRoutes;
 
 export class SelectRoute implements Action {
   readonly type = DashboardActionTypes.SelectRoute;
@@ -103,7 +103,7 @@ export class ClearSelectedRoute implements Action {
   readonly type = DashboardActionTypes.ClearSelectedRoute;
 }
 
-type SelectRouteType = SelectRoute & ClearSelectedRoute;
+type SelectRouteType = SelectRoute | ClearSelectedRoute;
 
 export class SetStartDate implements Action {
   readonly type = DashboardActionTypes.SetStartDate;
@@ -114,8 +114,8 @@ export class SetStartDate implements Action {
 type SetStartDateType = SetStartDate;
 
 export type DashboardActions =
-GetFilteredAirportsType &
-SelectedAirportType &
-GetRoutesType &
-SelectRouteType &
+GetFilteredAirportsType |
+SelectedAirportType |
+GetRoutesType |
+SelectRouteType |
 SetStartDateType;

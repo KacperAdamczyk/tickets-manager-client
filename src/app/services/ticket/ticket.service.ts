@@ -24,6 +24,10 @@ export class TicketService {
     return this.http.get<Partial<ITicket>[]>(`${environment.apiUrl}/tickets`, { withCredentials: true });
   }
 
+  getTicketsForUser(userId: string): Observable<Partial<ITicket>[]> {
+    return this.http.get<Partial<ITicket>[]>(`${environment.apiUrl}/tickets/${userId}`, { withCredentials: true });
+  }
+
   getTicket(id: string): Observable<ITicket> {
     return this.http.get<ITicket>(`${environment.apiUrl}/tickets/${id}`, { withCredentials: true });
   }

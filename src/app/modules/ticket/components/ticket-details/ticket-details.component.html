@@ -1,7 +1,7 @@
 <button mat-mini-fab color="primary" routerLink="/tickets">
   <mat-icon>keyboard_arrow_left</mat-icon>
 </button>
-<mat-card class="card" *ngIf="ticket$ | async as ticket">
+<mat-card class="card" *ngIf="ticket$ | async as ticket; else loading">
   <mat-card-header>
     <mat-card-title class="card__title">
       {{ticket?.route?.sourceAirport?.iata}}
@@ -22,3 +22,6 @@
     <button mat-raised-button color="primary" (click)="deleteTicket(ticket)">Remove reservation</button>
   </mat-card-actions>
 </mat-card>
+<ng-template #loading>
+  <mat-progress-spinner color="primary" mode="indeterminate" class="spinner"></mat-progress-spinner>
+</ng-template>

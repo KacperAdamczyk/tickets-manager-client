@@ -14,3 +14,17 @@
   position: sticky;
   top: 0;
 }
+
+a.link {
+  display: flex;
+  justify-content: center;
+
+  &--active {
+    font-weight: bold;
+    background-color: rgba(0,0,0,.1);
+  }
+
+  & > div {
+    flex-grow: 1;
+  }
+}

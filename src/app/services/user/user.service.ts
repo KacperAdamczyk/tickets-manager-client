@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { IUser } from 'src/app/models/user.interface';
 import { HttpClient } from '@angular/common/http';
 import { Store, select } from '@ngrx/store';
-import { Observable } from 'rxjs';
-import { map, filter } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { map, filter, tap } from 'rxjs/operators';
 
 import { environment } from 'src/environments/environment';
 import { IDataResponse, IMessageResponse } from 'src/app/shared/interfaces/response.interface';
@@ -18,8 +18,6 @@ export type TokenPurpose = 'activation' | 'password-reset';
   providedIn: 'root'
 })
 export class UserService {
-  areUserDetailsFetched = false;
-
   constructor(private http: HttpClient, private store: Store<AppState>) { }
 
   register(user: Partial<IUser>): Observable<IDataResponse> {
@@ -31,9 +29,11 @@ export class UserService {
   }
 
   getUser(): Observable<IUser> {
-    this.areUserDetailsFetched = true;
-
     return this.http.get<IUser>(`${environment.apiUrl}/users`, { withCredentials: true });
+  }
+
+  getUsers(): Observable<IUser[]> {
+    return this.http.get<IUser[]>(`${environment.apiUrl}/users/all`, { withCredentials: true });
   }
 
   validateToken(token: string, purpose: TokenPurpose): Observable<IDataResponse> {
@@ -45,14 +45,16 @@ export class UserService {
   }
 
   isLoggedIn(): Observable<boolean> {
-    if (!this.areUserDetailsFetched) {
-      this.store.dispatch(new GetUser);
-    }
-
     return this.store.pipe(
       select('user'),
       filter((user: UserState) => !user.getPending),
-      map(({ userDetails }) => !!userDetails)
+      map(({ user }) => !!user)
+    );
+  }
+
+  isAdmin(): Observable<boolean> {
+    return this.getUser().pipe(
+      map(user => user.admin)
     );
   }
 }

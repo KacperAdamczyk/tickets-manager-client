@@ -26,7 +26,6 @@ import { TicketModule } from './modules/ticket/ticket.module';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
     StoreModule.forRoot(reducers, { metaReducers }),
@@ -34,13 +33,14 @@ import { TicketModule } from './modules/ticket/ticket.module';
     MatSnackBarModule,
     UiModule,
     UserModule,
+    DashboardModule,
+    TicketModule,
+    AppRoutingModule,
     StoreRouterConnectingModule.forRoot(),
     StoreDevtoolsModule.instrument({
       logOnly: environment.production,
     }),
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
-    DashboardModule,
-    TicketModule,
   ],
   providers: [httpInterceptorProviders],
   bootstrap: [AppComponent]

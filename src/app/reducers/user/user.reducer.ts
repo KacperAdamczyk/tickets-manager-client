@@ -6,7 +6,7 @@ export interface State {
   loginPending: boolean;
   registerPending: boolean;
   activatePending: boolean;
-  userDetails?: IUser;
+  user?: IUser;
 }
 
 export const initialState: State = {
@@ -22,66 +22,66 @@ export function reducer(state = initialState, action: UserActions): State {
       return {
         ...state,
         getPending: true,
-        userDetails: null,
+        user: null,
       };
     case UserActionTypes.Login:
       return {
         ...state,
         loginPending: true,
-        userDetails: null,
+        user: null,
       };
     case UserActionTypes.Register:
       return {
         ...state,
         registerPending: true,
-        userDetails: null,
+        user: null,
       };
     case UserActionTypes.Activate:
       return {
         ...state,
         activatePending: true,
-        userDetails: null,
+        user: null,
       };
 
     case UserActionTypes.GetUserSuccess:
       return {
         ...state,
         getPending: false,
-        userDetails: action.payload,
+        user: action.payload,
       };
     case UserActionTypes.LoginSuccess:
       return {
         ...state,
         loginPending: false,
-        userDetails: action.payload,
+        user: action.payload,
       };
 
     case UserActionTypes.GetUserFailure:
-    case UserActionTypes.ClearUserDetails:
+    case UserActionTypes.ClearUser:
       return {
         ...state,
         getPending: false,
-        userDetails: null,
+        user: null,
       };
     case UserActionTypes.LoginFailure:
       return {
         ...state,
         loginPending: false,
-        userDetails: null,
+        user: null,
       };
     case UserActionTypes.RegisterSuccess:
     case UserActionTypes.RegisterFailure:
       return {
         ...state,
         registerPending: false,
-        userDetails: null,
+        user: null,
       };
     case UserActionTypes.ActivateSuccess:
     case UserActionTypes.ActivateFailure:
       return {
         ...state,
         activatePending: false,
-        userDetails: null,
+        user: null,
       };
 
     default:

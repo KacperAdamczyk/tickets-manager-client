@@ -35,7 +35,7 @@ export class CreateTicketFailure implements Action {
   readonly type = TicketActionTypes.CreateTicketFailure;
 }
 
-type CreateTicketType = CreateTicket & CreateTicketSuccess & CreateTicketFailure;
+type CreateTicketType = CreateTicket | CreateTicketSuccess | CreateTicketFailure;
 
 export class GetTickets implements Action {
   readonly type = TicketActionTypes.GetTickets;
@@ -51,7 +51,7 @@ export class GetTicketsFailure implements Action {
   readonly type = TicketActionTypes.GetTicketsFailure;
 }
 
-type GetTicketsType = GetTickets & GetTicketsSuccess & GetTicketsFailure;
+type GetTicketsType = GetTickets | GetTicketsSuccess | GetTicketsFailure;
 
 export class GetTicket implements Action {
   readonly type = TicketActionTypes.GetTicket;
@@ -69,7 +69,7 @@ export class GetTicketFailure implements Action {
   readonly type = TicketActionTypes.GetTicketFailure;
 }
 
-type GetTicketType = GetTicket & GetTicketSuccess & GetTicketFailure;
+type GetTicketType = GetTicket | GetTicketSuccess | GetTicketFailure;
 
 export class DeleteTicket implements Action {
   readonly type = TicketActionTypes.DeleteTicket;
@@ -87,10 +87,10 @@ export class DeleteTicketFailure implements Action {
   readonly type = TicketActionTypes.DeleteTicketFailure;
 }
 
-type DeleteTicketType = DeleteTicket & DeleteTicketSuccess & DeleteTicketFailure;
+type DeleteTicketType = DeleteTicket | DeleteTicketSuccess | DeleteTicketFailure;
 
 export type TicketActions =
-CreateTicketType &
-GetTicketsType &
-GetTicketType &
+CreateTicketType |
+GetTicketsType |
+GetTicketType |
 DeleteTicketType;

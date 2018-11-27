@@ -1,95 +1,105 @@
+import { Action } from '@ngrx/store';
+import { AdminActions, AdminActionTypes } from '../../actions/admin/admin.actions';
 import { ITicket } from 'src/app/models/ticket.interface';
-import { TicketActionTypes, TicketActions } from 'src/app/actions/ticket/ticket.actions';
-
+import { IUser } from 'src/app/models/user.interface';
 
 export interface State {
-  createTicketPending: boolean;
+  getUsersPending: boolean;
   getTicketsPending: boolean;
   getTicketPending: boolean;
   deleteTicketsPending: boolean;
   tickets: Partial<ITicket>[];
   ticket: ITicket;
+  users: Partial<IUser>[];
 }
 
 export const initialState: State = {
-  createTicketPending: false,
+  getUsersPending: false,
   getTicketsPending: false,
   getTicketPending: false,
   deleteTicketsPending: false,
   tickets: [],
   ticket: null,
+  users: [],
 };
 
-export function reducer(state = initialState, action: TicketActions): State {
+export function reducer(state = initialState, action: AdminActions): State {
   switch (action.type) {
-    case TicketActionTypes.CreateTicket:
+    case AdminActionTypes.GetUsers:
     return {
       ...state,
-      createTicketPending: true,
+      getUsersPending: true,
     };
 
-    case TicketActionTypes.CreateTicketSuccess:
-    case TicketActionTypes.CreateTicketFailure:
+    case AdminActionTypes.GetUsersSuccess:
     return {
       ...state,
-      createTicketPending: false,
+      getUsersPending: false,
+      users: action.payload,
     };
 
-    case TicketActionTypes.GetTickets:
+    case AdminActionTypes.GetUsersFailure:
+    return {
+      ...state,
+      getUsersPending: false,
+      users: [],
+    };
+
+    case AdminActionTypes.GetTickets:
     return {
       ...state,
       getTicketsPending: true,
     };
 
-    case TicketActionTypes.GetTicketsSuccess:
+    case AdminActionTypes.GetTicketsSuccess:
     return {
       ...state,
       getTicketsPending: false,
       tickets: action.payload,
     };
 
-    case TicketActionTypes.GetTicketsFailure:
+    case AdminActionTypes.GetTicketsFailure:
     return {
       ...state,
       getTicketsPending: false,
       tickets: [],
     };
 
-    case TicketActionTypes.GetTicket:
+    case AdminActionTypes.GetTicket:
     return {
       ...state,
       getTicketPending: true,
       ticket: null,
     };
 
-    case TicketActionTypes.GetTicketSuccess:
+    case AdminActionTypes.GetTicketSuccess:
     return {
       ...state,
       getTicketPending: false,
       ticket: action.payload,
     };
 
-    case TicketActionTypes.GetTicketFailure:
+    case AdminActionTypes.GetTicketFailure:
     return {
       ...state,
       getTicketPending: false,
       ticket: null,
     };
 
-    case TicketActionTypes.DeleteTicket:
+    case AdminActionTypes.DeleteTicket:
     return {
       ...state,
       deleteTicketsPending: true,
     };
 
-    case TicketActionTypes.DeleteTicketSuccess:
+    case AdminActionTypes.DeleteTicketSuccess:
     return {
       ...state,
       deleteTicketsPending: false,
       tickets: state.tickets.filter(({ id }) => id !== action.payload.id),
     };
 
-    case TicketActionTypes.DeleteTicketFailure:
+    case AdminActionTypes.DeleteTicketFailure:
     return {
       ...state,
       deleteTicketsPending: false,
@@ -99,3 +109,4 @@ export function reducer(state = initialState, action: TicketActions): State {
       return state;
   }
 }
+

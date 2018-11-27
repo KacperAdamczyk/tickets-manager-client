@@ -8,7 +8,7 @@ import { catchError } from 'rxjs/operators';
 
 import { AppState } from '../reducers';
 import { Store } from '@ngrx/store';
-import { ClearUserDetails } from '../actions/user/user.actions';
+import { ClearUser } from '../actions/user/user.actions';
 
 @Injectable()
 export class SessionInterceptor implements HttpInterceptor {
@@ -18,7 +18,7 @@ export class SessionInterceptor implements HttpInterceptor {
     return next.handle(req).pipe(
       catchError((response: HttpErrorResponse) => {
         if (response.status === 401 || response.status === 440) {
-          this.store.dispatch(new ClearUserDetails);
+          this.store.dispatch(new ClearUser);
           this.router.navigateByUrl('/login');
         }
 
