@@ -11,11 +11,11 @@ import {
   GetTicketSuccess,
   DeleteTicket,
   DeleteTicketFailure,
+  DeleteTicketSuccess,
   GetTickets,
   GetUsersSuccess,
   GetUsersFailure,
 } from '../../actions/admin/admin.actions';
-import { DeleteTicketSuccess } from 'src/app/actions/ticket/ticket.actions';
 import { TicketService } from 'src/app/services/ticket/ticket.service';
 import { UserService } from 'src/app/services/user/user.service';
 

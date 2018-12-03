@@ -1,19 +1,17 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
+import { CanActivate, Router, CanLoad } from '@angular/router';
 import { Observable } from 'rxjs';
 
 import { UserService } from 'src/app/services/user/user.service';
-import { tap } from 'rxjs/operators';
+import { tap, first } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
-export class LogInGuard implements CanActivate {
+export class LogInGuard implements CanActivate, CanLoad {
   constructor(private router: Router, private userService: UserService) {}
 
-  canActivate(
-    next: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
+  canActivate(): Observable<boolean> {
       return this.userService.isLoggedIn().pipe(
         tap(isLogged => {
           if (!isLogged) {
@@ -21,5 +19,9 @@ export class LogInGuard implements CanActivate {
           }
         })
       );
+  }
+
+  canLoad(): Observable<boolean> {
+    return this.canActivate().pipe(first());
   }
 }

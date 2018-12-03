@@ -2,4 +2,8 @@
 
 .tickets {
   @include content;
+
+  &__header {
+    text-align: center;
+  }
 }

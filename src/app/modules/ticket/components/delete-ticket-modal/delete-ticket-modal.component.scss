@@ -3,6 +3,10 @@
   align-items: center;
   justify-content: center;
 
+  &__text {
+    text-align: center;
+  }
+
   &__icon {
     $size: 2em;
     width: $size / 2;
@@ -11,6 +15,10 @@
     color: red;
     margin-left: 10px;
   }
+}
+
+.content {
+  text-align: center;
 }
 
 .actions {

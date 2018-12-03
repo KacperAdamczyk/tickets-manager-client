@@ -6,7 +6,9 @@ import { DeleteTicketModalComponent } from '../delete-ticket-modal/delete-ticket
 import { filter } from 'rxjs/operators';
 import { AppState } from 'src/app/reducers';
 import { Store } from '@ngrx/store';
-import { DeleteTicket } from 'src/app/actions/ticket/ticket.actions';
+import { DeleteTicket as UserDeleteTicket } from 'src/app/actions/ticket/ticket.actions';
+import { DeleteTicket as AdminDeleteTicket } from 'src/app/actions/admin/admin.actions';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-ticket-list-item',
@@ -21,6 +23,10 @@ export class TicketListItemComponent {
     return DateTime.fromISO(this.ticket.startDate as string).plus(startTime).toJSDate();
   }
 
+  get isAdmin() {
+    return this.route.snapshot.data['admin'] || false;
+  }
+
   deleteTicket(ticket: ITicket) {
     const dialogRef = this.dialog.open(DeleteTicketModalComponent);
 
@@ -28,11 +34,19 @@ export class TicketListItemComponent {
       filter(result => result),
     )
     .subscribe(() => {
-      this.store.dispatch(new DeleteTicket({ id: ticket.id }));
+      const Action = this.isAdmin ? AdminDeleteTicket : UserDeleteTicket;
+
+      this.store.dispatch(new Action({ id: ticket.id }));
+      this.router.navigateByUrl(this.isAdmin ? 'admin' : 'tickets');
 
       sub.unsubscribe();
     });
   }
 
-  constructor(private store: Store<AppState>, private dialog: MatDialog) {}
+  constructor(
+    private store: Store<AppState>,
+    private dialog: MatDialog,
+    private route: ActivatedRoute,
+    private router: Router,
+    ) {}
 }

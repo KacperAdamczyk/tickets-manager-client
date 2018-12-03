@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormControl } from '@angular/forms';
 import { select, Store } from '@ngrx/store';
 import { combineLatest, Observable } from 'rxjs';
-import { map, filter } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { DateTime } from 'luxon';
 
 import { AppState } from 'src/app/reducers';
@@ -40,16 +40,19 @@ export class RoutesComponent implements OnInit, OnDestroy {
     this.startDate$,
   ).pipe(
     map(([routes, startDate]): IRoute[] => routes.map(route => {
-      const fromMillis = DateTime.fromMillis(startDate.valueOf()).startOf('day').valueOf();
-      const startTime = DateTime.fromMillis(route.startTime as number).plus(fromMillis);
-      const endTime = DateTime.fromMillis(route.endTime as number).plus(fromMillis);
+      const fromMillis = DateTime.fromMillis(startDate.valueOf()).startOf('day').toMillis();
+      const _startDate = DateTime.fromMillis(route.startTime as number).plus(fromMillis);
+      const _endDate = DateTime.fromMillis(route.endTime as number).plus(fromMillis);
 
       return {
         ...route,
-        startTime: startTime.toJSDate(),
-        endTime: endTime.toJSDate(),
+        startDate: _startDate.toJSDate(),
+        endDate: _endDate.toJSDate(),
       };
     })),
+    map((routes: IRoute[]) => routes.filter((route: IRoute) => (
+      DateTime.fromJSDate(route.startDate).diffNow().valueOf() > 0
+    )))
   );
 
   airportsSubscription = combineLatest(

@@ -7,11 +7,11 @@ import { TicketDetailsComponent } from './components/ticket-details/ticket-detai
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'tickets',
     canActivate: [LogInGuard],
     children: [
-      { path: 'tickets', component: UserTicketsComponent },
-      { path: 'tickets/:id', component: TicketDetailsComponent }
+      { path: '', component: UserTicketsComponent, pathMatch: 'full', },
+      { path: ':id', component: TicketDetailsComponent, pathMatch: 'full', }
     ]
   }
 ];

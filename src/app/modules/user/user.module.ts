@@ -14,6 +14,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { ActivationComponent } from './components/activation/activation.component';
 import { PasswordStrengthComponent } from './components/password-strength/password-strength.component';
 import { UiModule } from '../ui/ui.module';
+import { UserDetailsComponent } from './components/user-details/user-details.component';
 
 @NgModule({
   imports: [
@@ -28,7 +29,16 @@ import { UiModule } from '../ui/ui.module';
     StoreModule.forFeature('user', userReducer),
     EffectsModule.forFeature([UserEffects])
   ],
-  declarations: [LoginComponent, RegisterComponent, ActivationComponent, PasswordStrengthComponent],
-  exports: [LoginComponent]
+  declarations: [
+    LoginComponent,
+    RegisterComponent,
+    ActivationComponent,
+    PasswordStrengthComponent,
+    UserDetailsComponent
+  ],
+  exports: [
+    LoginComponent,
+    UserDetailsComponent,
+  ]
 })
 export class UserModule { }

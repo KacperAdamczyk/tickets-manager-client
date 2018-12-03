@@ -1,4 +1,3 @@
-import { Action } from '@ngrx/store';
 import { AdminActions, AdminActionTypes } from '../../actions/admin/admin.actions';
 import { ITicket } from 'src/app/models/ticket.interface';
 import { IUser } from 'src/app/models/user.interface';

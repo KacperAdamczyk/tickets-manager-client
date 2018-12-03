@@ -12,6 +12,10 @@ export enum UserActionTypes {
   LoginSuccess = '[User] Login Success',
   LoginFailure = '[User] Login Failure',
 
+  Logout = '[User] Logout',
+  LogoutSuccess = '[User] Logout Success',
+  LogoutFailure = '[User] Logout Failure',
+
   Register = '[User] Register',
   RegisterSuccess = '[User] Register Success',
   RegisterFailure = '[User] Register Failure',
@@ -52,6 +56,17 @@ export class LoginFailure implements Action {
 }
 type LoginTypes = Login | LoginSuccess | LoginFailure;
 
+export class Logout implements Action {
+  readonly type = UserActionTypes.Logout;
+}
+export class LogoutSuccess implements Action {
+  readonly type = UserActionTypes.LogoutSuccess;
+}
+export class LogoutFailure implements Action {
+  readonly type = UserActionTypes.LogoutFailure;
+}
+type LogoutTypes = Logout | LogoutSuccess | LogoutFailure;
+
 export class Register implements Action {
   readonly type = UserActionTypes.Register;
 
@@ -81,5 +96,6 @@ type ActivateTypes = Activate | ActivateSuccess | ActivateFailure;
 export type UserActions =
 GetUserTypes |
 LoginTypes |
+LogoutTypes |
 RegisterTypes |
 ActivateTypes;

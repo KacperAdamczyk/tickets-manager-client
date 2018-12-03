@@ -9,16 +9,23 @@ import { catchError } from 'rxjs/operators';
 import { AppState } from '../reducers';
 import { Store } from '@ngrx/store';
 import { ClearUser } from '../actions/user/user.actions';
+import { UserService } from '../services/user/user.service';
 
 @Injectable()
 export class SessionInterceptor implements HttpInterceptor {
-  constructor(private store: Store<AppState>, private router: Router) {}
+  constructor(
+    private store: Store<AppState>,
+    private router: Router,
+    private userService: UserService) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(req).pipe(
       catchError((response: HttpErrorResponse) => {
         if (response.status === 401 || response.status === 440) {
           this.store.dispatch(new ClearUser);
+
+          this.userService.savePath();
+
           this.router.navigateByUrl('/login');
         }
 

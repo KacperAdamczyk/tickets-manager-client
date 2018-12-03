@@ -8,17 +8,20 @@
     [opened]="!(isHandset$ | async)">
     <mat-toolbar color="primary">Menu</mat-toolbar>
     <mat-nav-list>
-      <a mat-list-item *ngFor="let link of links" [routerLink]="link.path" class="link" routerLinkActive="link--active">
-        {{link.label}}
-      </a>
-      <a
-      mat-list-item
-      *ngIf="(user$ | async).admin"
-      routerLink="admin"
-      class="link"
-      routerLinkActive="link--active">
-        Manage
-      </a>
+      <ng-container *ngIf="user$ | async as user; else login">
+        <a mat-list-item *ngFor="let link of links" [routerLink]="link.path" class="link" routerLinkActive="link--active">
+          {{link.label}}
+        </a>
+        <a mat-list-item *ngIf="user?.admin" routerLink="admin" class="link" routerLinkActive="link--active">
+          Manage
+        </a>
+        <button mat-button class="button" (click)="logout()">Logout</button>
+      </ng-container>
+      <ng-template #login>
+        <a mat-list-item routerLink="login" class="link" routerLinkActive="link--active">
+          Login
+        </a>
+      </ng-template>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>

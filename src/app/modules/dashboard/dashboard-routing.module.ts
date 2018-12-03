@@ -5,7 +5,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { LogInGuard } from 'src/app/guards/log-in/log-in.guard';
 
 const routes: Routes = [
-  { path: 'dashboard', component: DashboardComponent, canActivate: [LogInGuard] }
+  { path: 'dashboard', component: DashboardComponent, canActivate: [LogInGuard], pathMatch: 'full' }
 ];
 
 @NgModule({

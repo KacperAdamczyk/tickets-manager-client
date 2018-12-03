@@ -4,6 +4,7 @@ import { IUser } from 'src/app/models/user.interface';
 export interface State {
   getPending: boolean;
   loginPending: boolean;
+  logoutPending: boolean;
   registerPending: boolean;
   activatePending: boolean;
   user?: IUser;
@@ -12,6 +13,7 @@ export interface State {
 export const initialState: State = {
   getPending: false,
   loginPending: false,
+  logoutPending: false,
   registerPending: false,
   activatePending: false,
 };
@@ -29,6 +31,11 @@ export function reducer(state = initialState, action: UserActions): State {
         ...state,
         loginPending: true,
         user: null,
+      };
+      case UserActionTypes.Logout:
+      return {
+        ...state,
+        logoutPending: true,
       };
     case UserActionTypes.Register:
       return {
@@ -54,6 +61,13 @@ export function reducer(state = initialState, action: UserActions): State {
         ...state,
         loginPending: false,
         user: action.payload,
+      };
+      case UserActionTypes.LogoutSuccess:
+      case UserActionTypes.LogoutFailure:
+      return {
+        ...state,
+        logoutPending: false,
+        user: null,
       };
 
     case UserActionTypes.GetUserFailure:

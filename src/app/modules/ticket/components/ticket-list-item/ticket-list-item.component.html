@@ -1,9 +1,11 @@
 <mat-card class="item">
-  <span class="item__element">{{startDate | date:'short'}}</span>
   <div class="item__element">
-      <span>{{ticket.route.sourceAirport.city}}</span>
-      <mat-icon>arrow_forward</mat-icon>
-      <span>{{ticket.route.destinationAirport.city}}</span>
+      <span >{{startDate | date:'short'}}</span>
+      <div class="item__element__info">
+          <span class="item__element__info__section">{{ticket.route.sourceAirport.city}}</span>
+          <mat-icon>arrow_forward</mat-icon>
+          <span class="item__element__info__section">{{ticket.route.destinationAirport.city}}</span>
+      </div>
   </div>
   <div class="item__actions">
     <button mat-icon-button color="primary" [routerLink]="ticket.id">

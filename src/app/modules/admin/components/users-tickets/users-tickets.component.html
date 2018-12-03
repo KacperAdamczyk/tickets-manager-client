@@ -1,3 +1,26 @@
-<p>
-  users-tickets works!
-</p>
+
+<form [formGroup]="userForm" class="form">
+  <h2 class="form__header">Manage tickets</h2>
+  <mat-form-field class="form__input">
+    <input
+      type="text"
+      placeholder="Select user"
+      matInput
+      formControlName="userQuery"
+      [matAutocomplete]="auto"
+    >
+    <mat-autocomplete #auto="matAutocomplete" [displayWith]="formatUser">
+      <mat-option *ngFor="let user of filteredUsers$ | async" [value]="user">
+        {{formatUser(user)}}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+  <app-ticket-list [tickets$]="tickets$">
+    <div class="form__label" *ngIf="userQuery.value; else notSelected">
+      Selected user does not have any tickets.
+    </div>
+    <ng-template #notSelected>
+     <div class="form__label">No user selected.</div>
+    </ng-template>
+  </app-ticket-list>
+</form>

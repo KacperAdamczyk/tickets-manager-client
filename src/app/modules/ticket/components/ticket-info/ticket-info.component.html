@@ -19,7 +19,7 @@
     </div>
     <div>
       <span>Start date: </span>
-      <span class="info__value">{{ticket?.route?.startTime}}</span>
+      <span class="info__value">{{ticket?.route?.startDate | date:'long'}}</span>
     </div>
   </div>
   <div>
@@ -42,7 +42,7 @@
     </div>
     <div>
       <span>Start date: </span>
-      <span class="info__value">{{ticket?.route?.endTime}}</span>
+      <span class="info__value">{{ticket?.route?.endDate | date:'long'}}</span>
     </div>
   </div>
   <div class="info__distance">

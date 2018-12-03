@@ -1,9 +1,12 @@
 import { Component } from '@angular/core';
-import { BreakpointObserver, Breakpoints, BreakpointState } from '@angular/cdk/layout';
+import { Router } from '@angular/router';
+import { Store, select } from '@ngrx/store';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+
 import { AppState } from 'src/app/reducers';
-import { Store, select } from '@ngrx/store';
+import { Logout } from 'src/app/actions/user/user.actions';
 
 @Component({
   selector: 'app-nav',
@@ -25,5 +28,13 @@ export class NavComponent {
     select('user', 'user'),
   );
 
-  constructor(private breakpointObserver: BreakpointObserver, private store: Store<AppState>) {}
+  logout() {
+    this.store.dispatch(new Logout);
+  }
+
+  constructor(
+    private breakpointObserver: BreakpointObserver,
+     private store: Store<AppState>,
+     private router: Router,
+     ) {}
   }

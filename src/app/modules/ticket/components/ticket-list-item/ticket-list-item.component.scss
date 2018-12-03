@@ -1,17 +1,29 @@
 .item {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
   align-items: center;
 
   &__element {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
+    justify-content: space-between;
+    flex-grow: 1;
+
+    &__info {
+      display: flex;
+      justify-content: space-between;
+
+      &__section {
+        display: flex;
+        align-items: center;
+      }
+    }
   }
 
   &__actions {
     display: flex;
     align-items: center;
-    justify-items: flex-end;
+    justify-content: flex-end;
+    flex-grow: 1;
   }
 }

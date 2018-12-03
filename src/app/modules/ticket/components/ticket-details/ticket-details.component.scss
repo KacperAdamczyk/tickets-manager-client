@@ -2,15 +2,34 @@
 
 .card {
   @include content;
-
   margin-top: 3px;
 
   &__title {
     display: flex;
     align-items: center;
+
+    &--big {
+      font-size: 1.6em;
+    }
+
+    &__date {
+      text-align: center;
+      font-size: 1.2em;
+    }
   }
 
   &__details {
+    padding: 0 16px;
+    font-size: 1em;
+
+    &__passenger {
+      margin-bottom: 15px;
+
+      &__title {
+        margin: 5px 0;
+      }
+    }
+
     &__qr-code {
       display: flex;
       justify-content: center;

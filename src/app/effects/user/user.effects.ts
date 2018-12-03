@@ -7,7 +7,10 @@ import { mergeMap, map, catchError } from 'rxjs/operators';
 import {
   UserActionTypes,
   Login, LoginSuccess, LoginFailure,
-  Register, RegisterSuccess, RegisterFailure, Activate, ActivateSuccess, ActivateFailure, GetUserSuccess, GetUserFailure, GetUser
+  Register, RegisterSuccess, RegisterFailure,
+  Activate, ActivateSuccess, ActivateFailure,
+  GetUserSuccess, GetUserFailure,
+  LogoutSuccess, LogoutFailure,
 } from '../../actions/user/user.actions';
 import { UserService } from 'src/app/services/user/user.service';
 import { IUser } from 'src/app/models/user.interface';
@@ -54,11 +57,27 @@ export class UserEffects {
       this.userService.login(email, password).pipe(
         this.snackbar.fromResponse(),
         map(response => {
-          this.router.navigateByUrl('/');
+          this.router.navigateByUrl(this.userService.returnUrl);
 
           return new LoginSuccess(response.user as IUser);
         }),
         catchError(() => of(new LoginFailure))
+      )
+    ))
+  );
+
+  @Effect()
+  logout$ = this.actions$.pipe(
+    ofType(UserActionTypes.Logout),
+    mergeMap(() => (
+      this.userService.logout().pipe(
+        this.snackbar.fromResponse(),
+        map(() => {
+          this.router.navigateByUrl('/login');
+
+          return new LogoutSuccess;
+        }),
+        catchError(() => of(new LogoutFailure))
       )
     ))
   );

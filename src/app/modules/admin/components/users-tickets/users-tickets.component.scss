@@ -1,0 +1,18 @@
+@import '../../../../shared/styles/common.scss';
+
+.form {
+  @include content;
+
+  &__header {
+    text-align: center;
+  }
+
+  &__input {
+    width: 100%;
+  }
+
+  &__label {
+    text-align: center;
+    width: 100%;
+  }
+}

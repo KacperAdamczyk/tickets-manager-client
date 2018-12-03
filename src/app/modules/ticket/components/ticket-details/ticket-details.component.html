@@ -1,20 +1,24 @@
-<button mat-mini-fab color="primary" routerLink="/tickets">
+<button mat-mini-fab color="primary" routerLink="../">
   <mat-icon>keyboard_arrow_left</mat-icon>
 </button>
 <mat-card class="card" *ngIf="ticket$ | async as ticket; else loading">
   <mat-card-header>
-    <mat-card-title class="card__title">
+    <mat-card-title class="card__title card__title--big">
       {{ticket?.route?.sourceAirport?.iata}}
       <mat-icon>arrow_forward</mat-icon>
       {{ticket?.route?.destinationAirport?.iata}}
     </mat-card-title>
     <mat-card-subtitle class="card__title">
-      {{ticket?.route?.startTime | date:'short'}}
+      <span class="card__title__date">{{ticket?.route?.startDate | date:'short'}}</span>
       <mat-icon>arrow_forward</mat-icon>
-      {{ticket?.route?.endTime | date:'short'}}
+      <span class="card__title__date">{{ticket?.route?.endDate | date:'short'}}</span>
     </mat-card-subtitle>
   </mat-card-header>
   <mat-card-content class="card__details">
+    <div class="card__details__passenger">
+      <h3 class="card__details__passenger__title">Passenger:</h3>
+      <app-user-details [user]="ticket.user"></app-user-details>
+    </div>
     <app-ticket-info [ticket]="ticket"></app-ticket-info>
     <qrcode class="card__details__qr-code" [qrdata]="ticket.id" [size]="200" [level]="'H'"></qrcode>
   </mat-card-content>

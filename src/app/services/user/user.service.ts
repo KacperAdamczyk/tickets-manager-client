@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { IUser } from 'src/app/models/user.interface';
 import { HttpClient } from '@angular/common/http';
 import { Store, select } from '@ngrx/store';
-import { Observable, of } from 'rxjs';
-import { map, filter, tap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { map, filter } from 'rxjs/operators';
 
 import { environment } from 'src/environments/environment';
 import { IDataResponse, IMessageResponse } from 'src/app/shared/interfaces/response.interface';
@@ -11,14 +11,27 @@ import { AppState } from 'src/app/reducers';
 import {State as UserState } from 'src/app/reducers/user/user.reducer';
 import { GetUser } from 'src/app/actions/user/user.actions';
 
-
 export type TokenPurpose = 'activation' | 'password-reset';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
+  private userFetched = false;
+  private _returnUrl: string = null;
+
+  get returnUrl(): string {
+    const url = this._returnUrl;
+    this._returnUrl = null;
+
+    return url || '/';
+  }
+
   constructor(private http: HttpClient, private store: Store<AppState>) { }
+
+  savePath() {
+    this._returnUrl = location.pathname;
+  }
 
   register(user: Partial<IUser>): Observable<IDataResponse> {
     return this.http.post<IDataResponse>(`${environment.apiUrl}/users`, user);
@@ -26,6 +39,10 @@ export class UserService {
 
   login(email: string, password: string): Observable<IDataResponse> {
     return this.http.post<IDataResponse>(`${environment.apiUrl}/users/login`, { email, password });
+  }
+
+  logout(): Observable<IMessageResponse> {
+    return this.http.get<IMessageResponse>(`${environment.apiUrl}/users/logout`);
   }
 
   getUser(): Observable<IUser> {
@@ -45,16 +62,23 @@ export class UserService {
   }
 
   isLoggedIn(): Observable<boolean> {
+    if (!this.userFetched) {
+      this.store.dispatch(new GetUser);
+      this.userFetched = true;
+    }
+
     return this.store.pipe(
       select('user'),
-      filter((user: UserState) => !user.getPending),
+      filter((user: UserState) => !user.getPending && this.userFetched),
       map(({ user }) => !!user)
     );
   }
 
   isAdmin(): Observable<boolean> {
-    return this.getUser().pipe(
-      map(user => user.admin)
+    return this.store.pipe(
+      select('user'),
+      filter((user: UserState) => !user.getPending),
+      map(({ user }) => user && user.admin)
     );
   }
 }
