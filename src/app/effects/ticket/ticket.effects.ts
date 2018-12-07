@@ -65,6 +65,7 @@ export class TicketEffects {
     ofType(TicketActionTypes.DeleteTicket),
     mergeMap(({ payload: { id } }: DeleteTicket) => (
       this.ticketService.deleteTicket(id).pipe(
+        this.snackbar.fromResponse(),
         map(() => new DeleteTicketSuccess({ id })),
         catchError(() => of(new DeleteTicketFailure))
       )

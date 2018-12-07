@@ -18,6 +18,7 @@ import {
 } from '../../actions/admin/admin.actions';
 import { TicketService } from 'src/app/services/ticket/ticket.service';
 import { UserService } from 'src/app/services/user/user.service';
+import { SnackbarService } from 'src/app/services/snackbar/snackbar.service';
 
 @Injectable()
 export class AdminEffects {
@@ -59,6 +60,7 @@ export class AdminEffects {
     ofType(AdminActionTypes.DeleteTicket),
     mergeMap(({ payload: { id } }: DeleteTicket) => (
       this.ticketService.deleteTicket(id).pipe(
+        this.snackbar.fromResponse(),
         map(() => new DeleteTicketSuccess({ id })),
         catchError(() => of(new DeleteTicketFailure))
       )
@@ -69,5 +71,6 @@ export class AdminEffects {
     private actions$: Actions,
     private userService: UserService,
     private ticketService: TicketService,
+    private snackbar: SnackbarService,
   ) {}
 }

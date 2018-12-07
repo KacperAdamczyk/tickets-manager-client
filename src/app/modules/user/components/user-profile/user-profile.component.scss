@@ -1,0 +1,21 @@
+@import '../../../../shared/styles/common.scss';
+
+.profile {
+  @include content;
+  font-size: 1em;
+
+  &__header {
+    text-align: center;
+  }
+
+  &__card {
+    &__content {
+      font-size: 1.2em;
+    }
+
+    &__actions {
+      display: flex;
+      justify-content: center;
+    }
+  }
+}

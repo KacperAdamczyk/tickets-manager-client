@@ -17,6 +17,7 @@ export class NavComponent {
   links = [
     { path: '/dashboard', label: 'Book ticket' },
     { path: '/tickets', label: 'My tickets' },
+    { path: '/profile', label: 'Your profile' },
   ];
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)

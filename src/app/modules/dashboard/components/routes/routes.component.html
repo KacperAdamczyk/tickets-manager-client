@@ -18,14 +18,14 @@
         <mat-card class="form__list__item__card">
           <div class="form__list__item__card__sections">
             <div class="form__list__item__card__sections__section">
-              <span class="form__list__item__card__sections__section__code">{{route.sourceIata}}</span>
+              <b>{{route.sourceIata}}</b>
               <span class="form__list__item__card__sections__section__date">
                 {{route.startDate | date:'short'}}
               </span>
             </div>
             <mat-icon>arrow_forward</mat-icon>
             <div class="form__list__item__card__sections__section">
-              <span class="form__list__item__card__sections__section__code">{{route.destinationIata}}</span>
+              <b>{{route.destinationIata}}</b>
               <span class="form__list__item__card__sections__section__date">
                 {{route.endDate | date:'short'}}
               </span>

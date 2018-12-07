@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
-import { MatInputModule, MatButtonModule, MatProgressSpinnerModule } from '@angular/material';
+import { MatInputModule, MatButtonModule, MatProgressSpinnerModule, MatCardModule } from '@angular/material';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { MatPasswordStrengthModule } from '@angular-material-extensions/password-strength';
@@ -15,6 +15,9 @@ import { ActivationComponent } from './components/activation/activation.componen
 import { PasswordStrengthComponent } from './components/password-strength/password-strength.component';
 import { UiModule } from '../ui/ui.module';
 import { UserDetailsComponent } from './components/user-details/user-details.component';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
+import { ChangePasswordComponent } from './components/change-password/change-password.component';
 
 @NgModule({
   imports: [
@@ -23,6 +26,8 @@ import { UserDetailsComponent } from './components/user-details/user-details.com
     MatInputModule,
     MatButtonModule,
     MatProgressSpinnerModule,
+    MatCardModule,
+    MatButtonModule,
     MatPasswordStrengthModule.forRoot(),
     UserRoutingModule,
     UiModule,
@@ -34,7 +39,10 @@ import { UserDetailsComponent } from './components/user-details/user-details.com
     RegisterComponent,
     ActivationComponent,
     PasswordStrengthComponent,
-    UserDetailsComponent
+    UserDetailsComponent,
+    UserProfileComponent,
+    ResetPasswordComponent,
+    ChangePasswordComponent
   ],
   exports: [
     LoginComponent,

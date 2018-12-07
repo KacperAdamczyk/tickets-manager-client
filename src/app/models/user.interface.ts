@@ -7,8 +7,9 @@ export interface IUser {
 }
 
 export interface ICredentials {
-  email: string;
+  email?: string;
   password: string;
+  newPassword?: string;
 }
 
 export interface IToken {

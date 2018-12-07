@@ -7,6 +7,8 @@ export interface State {
   logoutPending: boolean;
   registerPending: boolean;
   activatePending: boolean;
+  resetPasswordPending: boolean;
+  changePasswordPending: boolean;
   user?: IUser;
 }
 
@@ -16,6 +18,8 @@ export const initialState: State = {
   logoutPending: false,
   registerPending: false,
   activatePending: false,
+  resetPasswordPending: false,
+  changePasswordPending: false,
 };
 
 export function reducer(state = initialState, action: UserActions): State {
@@ -48,6 +52,17 @@ export function reducer(state = initialState, action: UserActions): State {
         ...state,
         activatePending: true,
         user: null,
+      };
+      case UserActionTypes.ResetPassword:
+      return {
+        ...state,
+        resetPasswordPending: true,
+        user: null,
+      };
+      case UserActionTypes.ChangePassword:
+      return {
+        ...state,
+        changePasswordPending: true,
       };
 
     case UserActionTypes.GetUserSuccess:
@@ -95,6 +110,20 @@ export function reducer(state = initialState, action: UserActions): State {
       return {
         ...state,
         activatePending: false,
+        user: null,
+      };
+    case UserActionTypes.ResetPasswordSuccess:
+    case UserActionTypes.ResetPasswordFailure:
+      return {
+        ...state,
+        resetPasswordPending: false,
+        user: null,
+      };
+    case UserActionTypes.ChangePasswordSuccess:
+    case UserActionTypes.ChangePasswordSuccess:
+      return {
+        ...state,
+        changePasswordPending: false,
         user: null,
       };
 

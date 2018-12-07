@@ -23,6 +23,14 @@ export enum UserActionTypes {
   Activate = '[User] Activate',
   ActivateSuccess = '[User] Activate Success',
   ActivateFailure = '[User] Activate Failure',
+
+  ResetPassword = '[User] Reset Password',
+  ResetPasswordSuccess = '[User] Reset Password Success',
+  ResetPasswordFailure = '[User] Reset Password Failure',
+
+  ChangePassword = '[User] Change Password',
+  ChangePasswordSuccess = '[User] Change Password Success',
+  ChangePasswordFailure = '[User] Change Password Failure',
 }
 
 export class GetUser implements Action {
@@ -93,9 +101,37 @@ export class ActivateFailure implements Action {
 }
 type ActivateTypes = Activate | ActivateSuccess | ActivateFailure;
 
+export class ResetPassword implements Action {
+  readonly type = UserActionTypes.ResetPassword;
+
+  constructor(public payload: ICredentials) {}
+}
+export class ResetPasswordSuccess implements Action {
+  readonly type = UserActionTypes.ResetPasswordSuccess;
+}
+export class ResetPasswordFailure implements Action {
+  readonly type = UserActionTypes.ResetPasswordFailure;
+}
+type ResetPasswordTypes = ResetPassword | ResetPasswordSuccess | ResetPasswordFailure;
+
+export class ChangePassword implements Action {
+  readonly type = UserActionTypes.ChangePassword;
+
+  constructor(public payload: ICredentials) {}
+}
+export class ChangePasswordSuccess implements Action {
+  readonly type = UserActionTypes.ChangePasswordSuccess;
+}
+export class ChangePasswordFailure implements Action {
+  readonly type = UserActionTypes.ChangePasswordFailure;
+}
+type ChangePasswordTypes = ChangePassword | ChangePasswordSuccess | ChangePasswordFailure;
+
 export type UserActions =
 GetUserTypes |
 LoginTypes |
 LogoutTypes |
 RegisterTypes |
-ActivateTypes;
+ActivateTypes |
+ResetPasswordTypes |
+ChangePasswordTypes;

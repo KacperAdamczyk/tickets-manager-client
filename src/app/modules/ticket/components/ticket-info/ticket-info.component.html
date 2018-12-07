@@ -3,51 +3,51 @@
     <h3 class="info__header">From:</h3>
     <div>
       <span>Airport name: </span>
-      <span class="info__value">{{ticket?.route?.sourceAirport?.name}}</span>
+      <b>{{ticket?.route?.sourceAirport?.name}}</b>
     </div>
     <div>
       <span>Airport code: </span>
-      <span class="info__value">{{ticket?.route?.sourceAirport?.iata}}/{{ticket?.route?.sourceAirport?.icao}}</span>
+      <b>{{ticket?.route?.sourceAirport?.iata}}/{{ticket?.route?.sourceAirport?.icao}}</b>
     </div>
     <div>
       <span>City: </span>
-      <span class="info__value">{{ticket?.route?.sourceAirport?.city}}</span>
+      <b>{{ticket?.route?.sourceAirport?.city}}</b>
     </div>
     <div>
       <span>County: </span>
-      <span class="info__value">{{ticket?.route?.sourceAirport?.country}}</span>
+      <b>{{ticket?.route?.sourceAirport?.country}}</b>
     </div>
     <div>
       <span>Start date: </span>
-      <span class="info__value">{{ticket?.route?.startDate | date:'long'}}</span>
+      <b>{{ticket?.route?.startDate | date:'long'}}</b>
     </div>
   </div>
   <div>
     <h3 class="info__header">To:</h3>
     <div>
       <span>Airport name: </span>
-      <span class="info__value">{{ticket?.route?.destinationAirport?.name}}</span>
+      <b>{{ticket?.route?.destinationAirport?.name}}</b>
     </div>
     <div>
       <span>Airport code: </span>
-      <span class="info__value">{{ticket?.route?.destinationAirport?.iata}}/{{ticket?.route?.destinationAirport?.icao}}</span>
+      <b>{{ticket?.route?.destinationAirport?.iata}}/{{ticket?.route?.destinationAirport?.icao}}</b>
     </div>
     <div>
       <span>City: </span>
-      <span class="info__value">{{ticket?.route?.destinationAirport?.city}}</span>
+      <b>{{ticket?.route?.destinationAirport?.city}}</b>
     </div>
     <div>
       <span>County: </span>
-      <span class="info__value">{{ticket?.route?.destinationAirport?.country}}</span>
+      <b>{{ticket?.route?.destinationAirport?.country}}</b>
     </div>
     <div>
       <span>Start date: </span>
-      <span class="info__value">{{ticket?.route?.endDate | date:'long'}}</span>
+      <b>{{ticket?.route?.endDate | date:'long'}}</b>
     </div>
   </div>
   <div class="info__distance">
     <span>Distance: </span>
-    <span class="info__value">{{ticket?.route?.distance}}</span>
+    <b>{{ticket?.route?.distance}}</b>
   </div>
 
 </div>

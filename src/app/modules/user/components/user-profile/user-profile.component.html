@@ -1,0 +1,12 @@
+<div class="profile">
+  <h2 class="profile__header">Profile</h2>
+  <mat-card class="profile__card">
+      <mat-card-content class="profile__card__content" *ngIf="user$ | async as user">
+          <app-user-details [user]="user"></app-user-details>
+          <span>Admin: <b>{{user.admin ? 'Yes' : 'No'}}</b></span>
+      </mat-card-content>
+      <mat-card-actions class="profile__card__actions">
+        <button mat-stroked-button color="primary" routerLink="/change-password">Change password</button>
+      </mat-card-actions>
+  </mat-card>
+</div>

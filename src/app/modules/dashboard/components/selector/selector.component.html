@@ -1,9 +1,9 @@
 <form [formGroup]="tripForm" class="selector-form">
   <mat-form-field class="selector-form__input">
     <input matInput placeholder="From" formControlName="from" [matAutocomplete]="autoFrom">
-    <span matSuffix class="selector-form__input__suffix">
+    <b matSuffix class="selector-form__input__suffix">
       {{(selectedFrom$ | async)?.iata}}
-    </span>
+    </b>
     <mat-autocomplete
       #autoFrom="matAutocomplete"
       [displayWith]="nameMapper"
@@ -19,9 +19,9 @@
   </button>
   <mat-form-field class="selector-form__input">
     <input matInput placeholder="To" formControlName="to" [matAutocomplete]="autoTo">
-    <span matSuffix class="selector-form__input__suffix">
+    <b matSuffix class="selector-form__input__suffix">
       {{(selectedTo$ | async)?.iata}}
-    </span>
+    </b>
     <mat-autocomplete
       #autoTo="matAutocomplete"
       [displayWith]="nameMapper"
