@@ -31,11 +31,11 @@ import { TicketModule } from './modules/ticket/ticket.module';
     StoreModule.forRoot(reducers, { metaReducers }),
     EffectsModule.forRoot([AppEffects]),
     MatSnackBarModule,
-    AppRoutingModule,
     TicketModule,
     UiModule,
     UserModule,
     DashboardModule,
+    AppRoutingModule,
     StoreRouterConnectingModule.forRoot(),
     StoreDevtoolsModule.instrument({
       logOnly: environment.production,

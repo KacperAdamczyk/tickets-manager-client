@@ -11,7 +11,7 @@ const routes: Routes = [
     loadChildren: './modules/admin/admin.module#AdminModule',
     canLoad: [ LogInGuard, AdminGuard ],
 },
-  // { path: '**', redirectTo: 'dashboard' },
+  { path: '**', redirectTo: 'dashboard' },
 ];
 
 @NgModule({

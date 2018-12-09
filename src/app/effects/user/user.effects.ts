@@ -10,7 +10,11 @@ import {
   Register, RegisterSuccess, RegisterFailure,
   Activate, ActivateSuccess, ActivateFailure,
   GetUserSuccess, GetUserFailure,
-  LogoutSuccess, LogoutFailure, ChangePassword, ChangePasswordSuccess, ChangePasswordFailure,
+  LogoutSuccess, LogoutFailure,
+  ChangePassword, ChangePasswordSuccess, ChangePasswordFailure,
+  RequestPasswordReset, RequestPasswordResetSuccess, RequestPasswordResetFailure,
+  ValidateToken, ValidateTokenSuccess, ValidateTokenFailure,
+  ResetPassword, ResetPasswordSuccess, ResetPasswordFailure,
 } from '../../actions/user/user.actions';
 import { UserService } from 'src/app/services/user/user.service';
 import { IUser } from 'src/app/models/user.interface';
@@ -78,6 +82,49 @@ export class UserEffects {
           return new LogoutSuccess;
         }),
         catchError(() => of(new LogoutFailure))
+      )
+    ))
+  );
+
+  @Effect()
+  validateToken$ = this.actions$.pipe(
+    ofType(UserActionTypes.ValidateToken),
+    mergeMap(({ payload:  { token, purpose } }: ValidateToken) => (
+      this.userService.validateToken(token, purpose).pipe(
+        map(() => new ValidateTokenSuccess),
+        catchError(() => of(new ValidateTokenFailure))
+      )
+    ))
+  );
+
+  @Effect()
+  requestPasswordReset$ = this.actions$.pipe(
+    ofType(UserActionTypes.RequestPasswordReset),
+    mergeMap(({ payload:  { email } }: RequestPasswordReset) => (
+      this.userService.requestPasswordReset(email).pipe(
+        this.snackbar.fromResponse(),
+        map(() => {
+          this.router.navigateByUrl('/login');
+
+          return new RequestPasswordResetSuccess;
+        }),
+        catchError(() => of(new RequestPasswordResetFailure))
+      )
+    ))
+  );
+
+  @Effect()
+  resetPassword$ = this.actions$.pipe(
+    ofType(UserActionTypes.ResetPassword),
+    mergeMap(({ payload: { token, credentials: { password } } }: ResetPassword) => (
+      this.userService.resetPassword(token, password).pipe(
+        this.snackbar.fromResponse(),
+        map(() => {
+          this.router.navigateByUrl('/login');
+
+          return new ResetPasswordSuccess;
+        }),
+        catchError(() => of(new ResetPasswordFailure))
       )
     ))
   );

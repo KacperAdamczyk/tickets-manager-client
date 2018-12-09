@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { IUser, ICredentials } from 'src/app/models/user.interface';
+import { IUser, ICredentials, IToken } from 'src/app/models/user.interface';
 import { HttpClient } from '@angular/common/http';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
@@ -11,7 +11,7 @@ import { AppState } from 'src/app/reducers';
 import {State as UserState } from 'src/app/reducers/user/user.reducer';
 import { GetUser } from 'src/app/actions/user/user.actions';
 
-export type TokenPurpose = 'activation' | 'password-reset';
+export type TokenPurpose = 'activation' | 'passwordReset';
 
 @Injectable({
   providedIn: 'root'
@@ -62,6 +62,21 @@ export class UserService {
 
   validateToken(token: string, purpose: TokenPurpose): Observable<IDataResponse> {
     return this.http.get<IDataResponse>(`${environment.apiUrl}/users/validate-token/${purpose}/${token}`);
+  }
+
+  requestPasswordReset(email: string): Observable<IMessageResponse> {
+    return this.http.patch<IMessageResponse>(
+      `${environment.apiUrl}/users/password/request/${email}`,
+      { withCredentials: true }
+    );
+  }
+
+  resetPassword(token, password): Observable<IMessageResponse> {
+    return this.http.patch<IMessageResponse>(
+      `${environment.apiUrl}/users/password/${token}`,
+      { password },
+      { withCredentials: true }
+    );
   }
 
   changePassword(passwords: ICredentials): Observable<IMessageResponse> {

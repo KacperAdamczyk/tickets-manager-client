@@ -24,6 +24,14 @@ export enum UserActionTypes {
   ActivateSuccess = '[User] Activate Success',
   ActivateFailure = '[User] Activate Failure',
 
+  ValidateToken = '[User] Validate Token',
+  ValidateTokenSuccess = '[User] Validate Token Success',
+  ValidateTokenFailure = '[User] Validate Token Failure',
+
+  RequestPasswordReset = '[User] Request Password Reset',
+  RequestPasswordResetSuccess = '[User] Request Password Reset Success',
+  RequestPasswordResetFailure = '[User] Request Password Reset Failure',
+
   ResetPassword = '[User] Reset Password',
   ResetPasswordSuccess = '[User] Reset Password Success',
   ResetPasswordFailure = '[User] Reset Password Failure',
@@ -101,10 +109,36 @@ export class ActivateFailure implements Action {
 }
 type ActivateTypes = Activate | ActivateSuccess | ActivateFailure;
 
+export class ValidateToken implements Action {
+  readonly type = UserActionTypes.ValidateToken;
+
+  constructor(public payload: IToken) {}
+}
+export class ValidateTokenSuccess implements Action {
+  readonly type = UserActionTypes.ValidateTokenSuccess;
+}
+export class ValidateTokenFailure implements Action {
+  readonly type = UserActionTypes.ValidateTokenFailure;
+}
+type ValidateTokenTypes = ValidateToken | ValidateTokenSuccess | ValidateTokenFailure;
+
+export class RequestPasswordReset implements Action {
+  readonly type = UserActionTypes.RequestPasswordReset;
+
+  constructor(public payload: ICredentials) {}
+}
+export class RequestPasswordResetSuccess implements Action {
+  readonly type = UserActionTypes.RequestPasswordResetSuccess;
+}
+export class RequestPasswordResetFailure implements Action {
+  readonly type = UserActionTypes.RequestPasswordResetFailure;
+}
+type RequestPasswordResetTypes = RequestPasswordReset | RequestPasswordResetSuccess | RequestPasswordResetFailure;
+
 export class ResetPassword implements Action {
   readonly type = UserActionTypes.ResetPassword;
 
-  constructor(public payload: ICredentials) {}
+  constructor(public payload: { token: IToken, credentials: ICredentials }) {}
 }
 export class ResetPasswordSuccess implements Action {
   readonly type = UserActionTypes.ResetPasswordSuccess;
@@ -133,5 +167,7 @@ LoginTypes |
 LogoutTypes |
 RegisterTypes |
 ActivateTypes |
+ValidateTokenTypes |
+RequestPasswordResetTypes |
 ResetPasswordTypes |
 ChangePasswordTypes;

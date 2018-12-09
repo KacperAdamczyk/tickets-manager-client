@@ -18,6 +18,7 @@ import { UserDetailsComponent } from './components/user-details/user-details.com
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { ChangePasswordComponent } from './components/change-password/change-password.component';
+import { RequestPasswordResetComponent } from './components/request-password-reset/request-password-reset.component';
 
 @NgModule({
   imports: [
@@ -42,7 +43,8 @@ import { ChangePasswordComponent } from './components/change-password/change-pas
     UserDetailsComponent,
     UserProfileComponent,
     ResetPasswordComponent,
-    ChangePasswordComponent
+    ChangePasswordComponent,
+    RequestPasswordResetComponent
   ],
   exports: [
     LoginComponent,

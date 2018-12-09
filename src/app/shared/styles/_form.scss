@@ -17,6 +17,14 @@
     flex-direction: row-reverse;
     justify-content: space-between;
 
+    &--column {
+      flex-direction: column;
+
+      & > button:not(:first-child) {
+        margin-top: 10px;
+      }
+    }
+
     &__button--wide {
       flex-grow: 1;
     }

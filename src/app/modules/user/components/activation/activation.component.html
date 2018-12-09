@@ -1,5 +1,5 @@
 <div class="content">
-  <app-status *ngIf="isInvalid$ | async else spinner">
+  <app-status status="error" *ngIf="isInvalid$ | async else spinner">
     Link is expired
   </app-status>
   <ng-template #spinner>

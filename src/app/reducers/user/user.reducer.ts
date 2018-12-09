@@ -7,9 +7,12 @@ export interface State {
   logoutPending: boolean;
   registerPending: boolean;
   activatePending: boolean;
+  validateTokenPending: boolean;
+  requestPasswordResetPending: boolean;
   resetPasswordPending: boolean;
   changePasswordPending: boolean;
   user?: IUser;
+  tokenValid: boolean;
 }
 
 export const initialState: State = {
@@ -18,8 +21,11 @@ export const initialState: State = {
   logoutPending: false,
   registerPending: false,
   activatePending: false,
+  validateTokenPending: false,
+  requestPasswordResetPending: false,
   resetPasswordPending: false,
   changePasswordPending: false,
+  tokenValid: false,
 };
 
 export function reducer(state = initialState, action: UserActions): State {
@@ -52,6 +58,17 @@ export function reducer(state = initialState, action: UserActions): State {
         ...state,
         activatePending: true,
         user: null,
+      };
+      case UserActionTypes.ValidateToken:
+      return {
+        ...state,
+        validateTokenPending: true,
+        tokenValid: false,
+      };
+      case UserActionTypes.RequestPasswordReset:
+      return {
+        ...state,
+        requestPasswordResetPending: true,
       };
       case UserActionTypes.ResetPassword:
       return {
@@ -111,6 +128,24 @@ export function reducer(state = initialState, action: UserActions): State {
         ...state,
         activatePending: false,
         user: null,
+      };
+    case UserActionTypes.ValidateTokenSuccess:
+      return {
+        ...state,
+        validateTokenPending: false,
+        tokenValid: true,
+      };
+      case UserActionTypes.ValidateTokenFailure:
+      return {
+        ...state,
+        validateTokenPending: false,
+        tokenValid: false,
+      };
+    case UserActionTypes.RequestPasswordResetSuccess:
+    case UserActionTypes.RequestPasswordResetFailure:
+      return {
+        ...state,
+        requestPasswordResetPending: false,
       };
     case UserActionTypes.ResetPasswordSuccess:
     case UserActionTypes.ResetPasswordFailure:

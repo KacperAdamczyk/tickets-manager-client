@@ -7,6 +7,8 @@ import { ActivationComponent } from './components/activation/activation.componen
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { LogInGuard } from 'src/app/guards/log-in/log-in.guard';
 import { ChangePasswordComponent } from './components/change-password/change-password.component';
+import { RequestPasswordResetComponent } from './components/request-password-reset/request-password-reset.component';
+import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent, pathMatch: 'full' },
@@ -14,6 +16,8 @@ const routes: Routes = [
   { path: 'profile', component: UserProfileComponent, pathMatch: 'full', canActivate: [LogInGuard] },
   { path: 'change-password', component: ChangePasswordComponent, pathMatch: 'full', canActivate: [LogInGuard] },
   { path: 'activate/:token', component: ActivationComponent, pathMatch: 'full' },
+  { path: 'reset-password', component: RequestPasswordResetComponent, pathMatch: 'full' },
+  { path: 'reset-password/:token', component: ResetPasswordComponent, pathMatch: 'full' },
 ];
 
 @NgModule({
