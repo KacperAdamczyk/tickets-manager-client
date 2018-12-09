@@ -26,6 +26,7 @@ export class TicketDetailsComponent implements OnInit, OnDestroy {
       const startDate = DateTime.fromISO(ticket.startDate as string).plus(startTime.toMillis());
       const endTime = DateTime.fromISO(ticket.route.endTime as string);
       const endDate = DateTime.fromISO(ticket.startDate as string).plus(endTime.toMillis());
+      const purchaseDate = DateTime.fromISO(ticket.purchaseDate as string);
 
       return {
         ...ticket,
@@ -33,6 +34,7 @@ export class TicketDetailsComponent implements OnInit, OnDestroy {
           ...ticket.route,
           startDate: startDate.toJSDate(),
           endDate: endDate.toJSDate(),
+          purchaseDate: purchaseDate.toJSDate(),
         },
       };
     })

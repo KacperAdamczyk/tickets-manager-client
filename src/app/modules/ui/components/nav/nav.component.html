@@ -9,18 +9,18 @@
     <mat-toolbar color="primary">Menu</mat-toolbar>
     <mat-nav-list>
       <ng-container *ngIf="user$ | async as user; else login">
-        <a mat-list-item *ngFor="let link of links" [routerLink]="link.path" class="link" routerLinkActive="link--active">
+        <button mat-button *ngFor="let link of links" [routerLink]="link.path" class="button" routerLinkActive="button--active">
           {{link.label}}
-        </a>
-        <a mat-list-item *ngIf="user?.admin" routerLink="admin" class="link" routerLinkActive="link--active">
+        </button>
+        <button mat-button *ngIf="user?.admin" routerLink="admin" class="button" routerLinkActive="button--active">
           Manage
-        </a>
+        </button>
         <button mat-button class="button" (click)="logout()">Logout</button>
       </ng-container>
       <ng-template #login>
-        <a mat-list-item routerLink="login" class="link" routerLinkActive="link--active">
+        <button mat-button routerLink="login" class="button" routerLinkActive="button--active">
           Login
-        </a>
+        </button>
       </ng-template>
     </mat-nav-list>
   </mat-sidenav>
@@ -34,7 +34,7 @@
         *ngIf="isHandset$ | async">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <span>Flight booking</span>
+      <span class="header-link" routerLink="/">Flight booking</span>
     </mat-toolbar>
     <div class="sidenav__content">
         <ng-content></ng-content>

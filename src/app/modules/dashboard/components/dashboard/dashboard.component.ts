@@ -4,6 +4,7 @@ import { Store, select } from '@ngrx/store';
 import { map, filter, delay } from 'rxjs/operators';
 
 import { AppState } from 'src/app/reducers';
+import { Clear } from 'src/app/actions/dashboard/dashboard.actions';
 
 @Component({
   selector: 'app-dashboard',
@@ -27,5 +28,7 @@ export class DashboardComponent implements OnDestroy {
 
   ngOnDestroy() {
     this.isRouteSelectedSubscription.unsubscribe();
+
+    this.store.dispatch(new Clear);
   }
 }

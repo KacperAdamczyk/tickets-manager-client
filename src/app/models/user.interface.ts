@@ -9,7 +9,7 @@ export interface IUser {
 export interface ICredentials {
   email?: string;
   password: string;
-  newPassword?: string;
+  oldPassword?: string;
 }
 
 export interface IToken {

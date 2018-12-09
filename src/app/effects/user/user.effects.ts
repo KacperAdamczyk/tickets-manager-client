@@ -10,7 +10,7 @@ import {
   Register, RegisterSuccess, RegisterFailure,
   Activate, ActivateSuccess, ActivateFailure,
   GetUserSuccess, GetUserFailure,
-  LogoutSuccess, LogoutFailure,
+  LogoutSuccess, LogoutFailure, ChangePassword, ChangePasswordSuccess, ChangePasswordFailure,
 } from '../../actions/user/user.actions';
 import { UserService } from 'src/app/services/user/user.service';
 import { IUser } from 'src/app/models/user.interface';
@@ -78,6 +78,22 @@ export class UserEffects {
           return new LogoutSuccess;
         }),
         catchError(() => of(new LogoutFailure))
+      )
+    ))
+  );
+
+  @Effect()
+  changePassword$ = this.actions$.pipe(
+    ofType(UserActionTypes.ChangePassword),
+    mergeMap(({ payload: passwords }: ChangePassword) => (
+      this.userService.changePassword(passwords).pipe(
+        this.snackbar.fromResponse(),
+        map(() => {
+          this.router.navigateByUrl('/profile');
+
+          return new ChangePasswordSuccess;
+        }),
+        catchError(() => of(new ChangePasswordFailure))
       )
     ))
   );

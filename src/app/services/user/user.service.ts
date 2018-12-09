@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { IUser } from 'src/app/models/user.interface';
+import { IUser, ICredentials } from 'src/app/models/user.interface';
 import { HttpClient } from '@angular/common/http';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
@@ -19,6 +19,7 @@ export type TokenPurpose = 'activation' | 'password-reset';
 export class UserService {
   private userFetched = false;
   private _returnUrl: string = null;
+  private notReturnablePaths = ['/login'];
 
   get returnUrl(): string {
     const url = this._returnUrl;
@@ -30,7 +31,13 @@ export class UserService {
   constructor(private http: HttpClient, private store: Store<AppState>) { }
 
   savePath() {
-    this._returnUrl = location.pathname;
+    const path = location.pathname;
+
+    if (this.notReturnablePaths.includes(path)) {
+      return;
+    }
+
+    this._returnUrl = path;
   }
 
   register(user: Partial<IUser>): Observable<IDataResponse> {
@@ -57,8 +64,16 @@ export class UserService {
     return this.http.get<IDataResponse>(`${environment.apiUrl}/users/validate-token/${purpose}/${token}`);
   }
 
+  changePassword(passwords: ICredentials): Observable<IMessageResponse> {
+    return this.http.patch<IMessageResponse>(
+      `${environment.apiUrl}/users/password`,
+      passwords,
+      { withCredentials: true }
+    );
+  }
+
   activate(token: string): Observable<IMessageResponse> {
-    return this.http.put<IMessageResponse>(`${environment.apiUrl}/users/activate/${token}`, {});
+    return this.http.patch<IMessageResponse>(`${environment.apiUrl}/users/activate/${token}`, {});
   }
 
   isLoggedIn(): Observable<boolean> {

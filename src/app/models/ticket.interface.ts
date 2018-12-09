@@ -4,7 +4,7 @@ export interface ITicket {
   id: string;
   route: Partial<IRoute>;
   startDate: string | Date;
-  purchaseDate: string;
+  purchaseDate: string | Date;
 }
 
 export interface ITicketRequest {

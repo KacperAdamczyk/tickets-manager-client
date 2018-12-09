@@ -15,6 +15,10 @@
     </mat-card-subtitle>
   </mat-card-header>
   <mat-card-content class="card__details">
+    <div>
+        <span>Purchased on: </span>
+        <b>{{ticket?.purchaseDate | date:'short'}}</b>
+    </div>
     <div class="card__details__passenger">
       <h3 class="card__details__passenger__title">Passenger:</h3>
       <app-user-details [user]="ticket.user"></app-user-details>

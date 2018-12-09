@@ -2,6 +2,11 @@
   display: flex;
   align-items: center;
 
+  &--expired {
+    color: gray;
+    background-color: darken(whitesmoke, 5%);
+  }
+
   &__element {
     display: flex;
     flex-wrap: wrap;

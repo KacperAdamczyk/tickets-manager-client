@@ -131,6 +131,12 @@ export function reducer(state = initialState, action: DashboardActions): State {
       selectedRoute: null,
     };
 
+    case DashboardActionTypes.Clear: {
+      return {
+        ...initialState,
+      };
+    }
+
     default:
       return state;
   }

@@ -1,4 +1,4 @@
-<mat-card class="item">
+<mat-card class="item" [ngClass]="{ 'item--expired': isExpired() }">
   <div class="item__element">
       <span >{{startDate | date:'short'}}</span>
       <div class="item__element__info">

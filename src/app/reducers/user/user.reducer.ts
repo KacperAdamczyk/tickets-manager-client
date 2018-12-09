@@ -120,11 +120,10 @@ export function reducer(state = initialState, action: UserActions): State {
         user: null,
       };
     case UserActionTypes.ChangePasswordSuccess:
-    case UserActionTypes.ChangePasswordSuccess:
+    case UserActionTypes.ChangePasswordFailure:
       return {
         ...state,
         changePasswordPending: false,
-        user: null,
       };
 
     default:

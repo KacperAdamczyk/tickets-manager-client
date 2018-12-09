@@ -27,6 +27,11 @@ export class TicketListItemComponent {
     return this.route.snapshot.data['admin'] || false;
   }
 
+  isExpired() {
+
+    return DateTime.fromJSDate(this.startDate).minus(Date.now()).toMillis() < 0;
+  }
+
   deleteTicket(ticket: ITicket) {
     const dialogRef = this.dialog.open(DeleteTicketModalComponent);
 

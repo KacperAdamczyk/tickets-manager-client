@@ -28,6 +28,8 @@ export enum DashboardActionTypes {
   ClearSelectedRoute = '[Dashboard] Clear Selected Route',
 
   SetStartDate = '[Dashboard] Set Start Date',
+
+  Clear = '[Dashboard] Clear',
 }
 
 export class GetFilteredAirports implements Action {
@@ -105,6 +107,12 @@ export class ClearSelectedRoute implements Action {
 
 type SelectRouteType = SelectRoute | ClearSelectedRoute;
 
+export class Clear implements Action {
+  readonly type = DashboardActionTypes.Clear;
+}
+
+type ClearType = Clear;
+
 export class SetStartDate implements Action {
   readonly type = DashboardActionTypes.SetStartDate;
 
@@ -118,4 +126,5 @@ GetFilteredAirportsType |
 SelectedAirportType |
 GetRoutesType |
 SelectRouteType |
-SetStartDateType;
+SetStartDateType |
+ClearType;
