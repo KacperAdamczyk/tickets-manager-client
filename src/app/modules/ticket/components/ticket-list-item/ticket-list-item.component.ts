@@ -32,7 +32,7 @@ export class TicketListItemComponent {
     return DateTime.fromJSDate(this.startDate).minus(Date.now()).toMillis() < 0;
   }
 
-  deleteTicket(ticket: ITicket) {
+  deleteTicket(ticket: Partial<ITicket>) {
     const dialogRef = this.dialog.open(DeleteTicketModalComponent);
 
     const sub = dialogRef.afterClosed().pipe(
