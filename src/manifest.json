@@ -1,8 +1,8 @@
 {
   "name": "Flight booking",
   "short_name": "Booking",
-  "theme_color": "#1976d2",
-  "background_color": "#fafafa",
+  "theme_color": "#3F51B5",
+  "background_color": "#3F51B5",
   "display": "standalone",
   "scope": "/",
   "start_url": "/",

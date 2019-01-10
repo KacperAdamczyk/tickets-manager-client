@@ -1,4 +1,6 @@
+const url = 'https://66ddeda6.ngrok.io';
+
 export const environment = {
   production: true,
-  apiUrl: 'http://192.168.0.6:8080/api',
+  apiUrl: `${url}/api`,
 };

@@ -8,7 +8,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "serve": "node server.js"
+    "serve": "node server.js",
+    "host": "yarn build --prod && yarn serve"
   },
   "private": true,
   "dependencies": {
@@ -47,6 +48,7 @@
     "@types/jasminewd2": "~2.0.6",
     "@types/node": "~10.12.18",
     "codelyzer": "~4.5.0",
+    "cors": "^2.8.5",
     "express": "^4.16.4",
     "http-proxy-middleware": "^0.19.1",
     "jasmine-core": "~3.3.0",
