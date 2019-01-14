@@ -10,7 +10,7 @@ const routes: Routes = [
     path: 'admin',
     loadChildren: './modules/admin/admin.module#AdminModule',
     canLoad: [ LogInGuard, AdminGuard ],
-},
+  },
   { path: '**', redirectTo: 'dashboard' },
 ];
 

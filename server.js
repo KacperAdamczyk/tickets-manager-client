@@ -11,9 +11,7 @@ const targetPort = 8080;
 const targetIp = 'localhost';
 const target = `http://${targetIp}:${targetPort}`;
 
-server.use(cors({
-  origin: 'http://192.168.0.6:8081'
-}));
+server.use(cors());
 server.use(morgan('short'));
 server.use(express.static('dist/be-frontend'));
 server.use('/api', proxy({ target, changeOrigin: true }));
