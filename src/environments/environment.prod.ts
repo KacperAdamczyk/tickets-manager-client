@@ -1,4 +1,4 @@
-const url = 'https://ced62b76.ngrok.io';
+const url = 'https://tickets-fe.herokuapp.com';
 
 export const environment = {
   production: true,
