@@ -1,15 +1,18 @@
+require('dotenv').config();
 const express = require('express');
 const proxy = require('http-proxy-middleware');
 const path = require('path');
 const morgan = require('morgan');
 const cors = require('cors');
 
+const { PORT, TARGET_PORT, TARGET_HOST, TARGET } = process.env;
+
 const server = express();
 
-const port = 8081;
-const targetPort = 8080;
-const targetIp = 'localhost';
-const target = `http://${targetIp}:${targetPort}`;
+const port = PORT;
+const targetPort = TARGET_PORT;
+const targetHost = TARGET_HOST;
+const target = TARGET || `http://${targetHost}:${targetPort}`;
 
 server.use(cors());
 server.use(morgan('short'));
