@@ -22,7 +22,9 @@
       "installMode": "lazy",
       "updateMode": "prefetch",
       "urls": [
+        "/assets/icons/icon-120x120.png",
         "/assets/icons/icon-144x144.png",
+        "/assets/icons/icon-180x180.png",
         "/assets/icons/icon-192x192.png",
         "/assets/icons/icon-512x512.png"
       ],
@@ -32,7 +34,9 @@
   "dataGroups": [],
   "hashTable": {
     "/4.776a766626d8a86eb98c.js": "7a01e833d51eee94ae19127c17464550f8b8b1e3",
+    "/assets/icons/icon-120x120.png": "b696bf356272c52720f8c52df35bb6eb3728cb48",
     "/assets/icons/icon-144x144.png": "d26a3ae9a388435a2ee4ace12c26e261207f1337",
+    "/assets/icons/icon-180x180.png": "cc75720997b8e755e1951a58d6f9af32f292f9b8",
     "/assets/icons/icon-192x192.png": "036333eca20ba38f4880fd1d62dd1ef4367038f1",
     "/assets/icons/icon-512x512.png": "5fe532787a5d29ecf5a84fec5665cfc936764c66",
     "/favicon.ico": "c67ad1c0d58fb4f80256062ddd81867ff7a7d21d",
